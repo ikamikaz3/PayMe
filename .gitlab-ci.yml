@@ -1,0 +1,13 @@
+before_script:
+  script: "npm install"
+
+build:
+  script: "npm start"
+
+test:
+  script: "jest"
+
+#deploy:
+# https://docs.expo.io/versions/latest/guides/setting-up-continuous-integration
+#  - Expo login avec account
+#  - Expo publish
