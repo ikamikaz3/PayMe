@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Button, Text, View } from "react-native";
 
 const Main = props => {
@@ -12,6 +13,11 @@ const Main = props => {
       />
     </View>
   );
+};
+
+Main.propTypes = {
+  navigation: PropTypes.exact({ navigate: PropTypes.func.isRequired })
+    .isRequired
 };
 
 export default Main;
