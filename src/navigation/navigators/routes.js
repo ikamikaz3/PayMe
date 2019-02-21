@@ -4,25 +4,23 @@ import * as screenNames from "../ScreenNames";
 // Screens
 import Home from "../../components/Home";
 import Main from "../../components/Main";
+import Login from "../../components/Login";
 
 const stackNavigator = createStackNavigator(
   {
+    [screenNames.LOGIN]: {
+      screen: Login
+    },
     [screenNames.HOME]: {
-      screen: Home,
-      navigationOptions: {
-        header: () => null
-      }
+      screen: Home
     },
     [screenNames.MAIN]: {
-      screen: Main,
-      navigationOptions: {
-        header: () => null
-      }
+      screen: Main
     }
   },
   {
     headerMode: "none",
-    initialRouteName: screenNames.HOME
+    initialRouteName: screenNames.LOGIN
   }
 );
 

@@ -2,19 +2,19 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Text, View, Button } from "react-native";
 
-const Home = props => {
+const Login = props => {
   const { navigation } = props;
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Home screen</Text>
-      <Button title="Go to Main" onPress={() => navigation.navigate("Main")} />
+      <Text>Login Screen</Text>
+      <Button title="Go to Home" onPress={() => navigation.navigate("Home")} />
     </View>
   );
 };
 
-Home.propTypes = {
+Login.propTypes = {
   navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired })
     .isRequired
 };
 
-export default Home;
+export default Login;

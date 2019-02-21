@@ -16,7 +16,7 @@ const Main = props => {
 };
 
 Main.propTypes = {
-  navigation: PropTypes.exact({ navigate: PropTypes.func.isRequired })
+  navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired })
     .isRequired
 };
 
