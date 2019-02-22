@@ -1,5 +1,6 @@
 import AppNavigator from "../navigators/routes";
 import * as screenNames from "../ScreenNames";
+import { Login, Logout } from "../actions/actionTypes";
 
 const LoginAction = AppNavigator.router.getActionForPathAndParams(
   screenNames.HOME

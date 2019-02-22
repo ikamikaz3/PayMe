@@ -10,16 +10,18 @@ import logger from 'redux-logger';
 
 const appReducer = combineReducers({ nav: navReducer });
 
-const middleware = createReactNavigationReduxMiddleware(nav => state.nav);
+const middleware = createReactNavigationReduxMiddleware(state => state.nav);
 
 const App = createReduxContainer(AppNavigator);
 
 const mapStateToProps = state => ({
-  nav: state.nav
+  state: state.nav
 });
 
 const AppWithNavigationState = connect(mapStateToProps)(App);
 
-const store = createStore(appReducer, applyMiddleware(middleware), applyMiddleware(logger));
+const middlewares = [middleware, logger];
+
+const store = createStore(appReducer, applyMiddleware(...middlewares));
 
 export { AppWithNavigationState, store };
