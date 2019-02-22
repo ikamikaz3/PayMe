@@ -1,12 +1,9 @@
 import { connect } from "react-redux";
-import {
-  createReactNavigationReduxMiddleware,
-  createReduxContainer
-} from "react-navigation-redux-helpers";
 import { applyMiddleware, combineReducers, createStore } from "redux";
+import logger from "redux-logger";
+
 import AppNavigator from "./routes";
 import navReducer from "../reducer/navReducer";
-import logger from 'redux-logger';
 
 const appReducer = combineReducers({ nav: navReducer });
 

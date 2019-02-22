@@ -19,7 +19,6 @@ const stackNavigator = createStackNavigator(
     }
   },
   {
-    headerMode: "none",
     initialRouteName: screenNames.LOGIN
   }
 );
