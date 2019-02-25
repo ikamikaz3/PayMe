@@ -1,4 +1,8 @@
-import { LOGIN_PENDING } from "../actions/actionTypes";
+import {
+  LOGIN_ERROR,
+  LOGIN_PENDING,
+  LOGIN_SUCCESS
+} from "../actions/actionTypes";
 import {
   LoginSuccess,
   LoginError,
@@ -18,8 +22,6 @@ function callLoginApi(email, password, callback) {
 export function login(email, password) {
   return dispatch => {
     dispatch(LoginPending(true));
-    dispatch(LoginSuccess(false));
-    dispatch(LoginError(null));
 
     callLoginApi(email, password, error => {
       dispatch(LoginPending(false));
@@ -41,8 +43,22 @@ const initialState = {
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_PENDING:
-      console.log("LOGIN_PENDING");
-      return state;
+      return {
+        ...state,
+        isLoginPending: action.isLoginPending,
+        isLoginSuccessful: false,
+        loginErrorMessage: null
+      };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        isLoginSuccessful: action.isLoginSuccessful
+      };
+    case LOGIN_ERROR:
+      return {
+        ...state,
+        loginErrorMessage: action.loginErrorMessage
+      };
     default:
       return state;
   }

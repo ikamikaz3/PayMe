@@ -7,7 +7,6 @@ import { login } from "../redux/reducers/loginReducer";
 class LoginComponent extends Component {
   constructor(props) {
     super(props);
-    const { navigation } = props;
     this.state = {
       email: "Enter email",
       password: "Enter password"
@@ -15,6 +14,8 @@ class LoginComponent extends Component {
   }
 
   render() {
+    const { email, password } = this.state;
+    const { loginErrorMessage, loginAction } = this.props;
     return (
       <View
         style={{
@@ -25,39 +26,40 @@ class LoginComponent extends Component {
       >
         <Text> Login Screen </Text>
         <TextInput
-          value={this.state.email}
-          onChangeText={email => this.setState({ email })}
+          value={email}
+          onChangeText={text => this.setState({ email: text })}
         />
         <TextInput
-          value={this.state.password}
-          onChangeText={password => this.setState({ password })}
+          value={password}
+          onChangeText={text => this.setState({ password: text })}
         />
-        <Button title={"Login"}
-          onPress={() => this.props.login(this.state.email, this.state.password)}
-        />
+        <Button title="Login" onPress={() => loginAction(email, password)} />
+        {loginErrorMessage !== null && <Text>{loginErrorMessage}</Text>}
       </View>
     );
   }
 }
 
 LoginComponent.propTypes = {
-  navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired })
-    .isRequired
+  loginErrorMessage: PropTypes.string,
+  loginAction: PropTypes.func.isRequired
+};
+
+LoginComponent.defaultProps = {
+  loginErrorMessage: null
 };
 
 const mapStateToProps = state => {
   return {
-    isLoginPending: state.isLoginPending,
-    isLoginSuccessful: state.isLoginSuccessful,
-    loginErrorMessage: state.loginErrorMessage
+    isLoginPending: state.loginReducer.isLoginPending,
+    isLoginSuccessful: state.loginReducer.isLoginSuccessful,
+    loginErrorMessage: state.loginReducer.loginErrorMessage
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    login: (email, password) => dispatch(login(email, password))
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  loginAction: (email, password) => dispatch(login(email, password))
+});
 
 export default connect(
   mapStateToProps,

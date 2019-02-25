@@ -1,15 +1,4 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import {
-  createStackNavigator,
-  createAppContainer,
-  addNavigationHelpers
-} from "react-navigation";
-import {
-  createReactNavigationReduxMiddleware,
-  reduxifyNavigator,
-  createNavigationReducer
-} from "react-navigation-redux-helpers";
+import { createStackNavigator } from "react-navigation";
 
 import * as screenNames from "./screenNames";
 
@@ -25,30 +14,4 @@ const AppNavigator = createStackNavigator({
   }
 });
 
-const initialState = AppNavigator.router.getStateForAction(
-  AppNavigator.router.getActionForPathAndParams("Login")
-);
-
-console.log(initialState);
-
-const navReducer = (state = initialState, action) => {
-  const nextState = AppNavigator.router.getStateForAction(action, state);
-
-  // Simply return the original `state` if `nextState` is null or undefined.
-  return nextState || state;
-};
-
-const navMiddleware = createReactNavigationReduxMiddleware(
-  "root",
-  state => state.nav
-);
-
-const App = reduxifyNavigator(AppNavigator, "root");
-
-const mapStateToProps = state => ({
-  state: state.nav
-});
-
-const AppWithNavigationState = connect(mapStateToProps)(App);
-
-export { AppWithNavigationState, navMiddleware, navReducer };
+export default AppNavigator;

@@ -1,9 +1,7 @@
 import { combineReducers } from "redux";
 import loginReducer from "./loginReducer";
-import { navReducer } from "../../navigation/routes";
+import NavigationReducer from "./navReducer";
 
-console.log(navReducer);
-
-const rootReducer = combineReducers({ nav: navReducer, loginReducer });
+const rootReducer = combineReducers({ nav: NavigationReducer, loginReducer });
 
 export default rootReducer;

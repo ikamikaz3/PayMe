@@ -19,10 +19,10 @@ function LoginSuccess(isLoginSuccessful) {
   };
 }
 
-function LoginError(LoginErrorMessage) {
+function LoginError(loginErrorMessage) {
   return {
     type: LOGIN_ERROR,
-    LoginErrorMessage
+    loginErrorMessage: loginErrorMessage.toString()
   };
 }
 
