@@ -6,5 +6,6 @@ npm-debug.*
 *.key
 *.mobileprovision
 
-// VS code
+// VS code & Webstorm
+.idea/
 .vscode/
