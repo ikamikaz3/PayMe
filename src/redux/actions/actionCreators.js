@@ -5,7 +5,8 @@ import {
   GO_TO_REGISTER,
   REGISTER_SUCCESS,
   REGISTER_PENDING,
-  REGISTER_ERROR
+  REGISTER_ERROR,
+  NAVIGATE_BACK
 } from "./actionTypes";
 
 function LoginPending(isLoginPending) {
@@ -56,6 +57,12 @@ function RegisterError(registerErrorMessage) {
   };
 }
 
+function navigateBack() {
+  return {
+    type: NAVIGATE_BACK
+  };
+}
+
 export {
   LoginPending,
   LoginSuccess,
@@ -63,5 +70,6 @@ export {
   goToRegister,
   RegisterSuccess,
   RegisterPending,
-  RegisterError
+  RegisterError,
+  navigateBack
 };

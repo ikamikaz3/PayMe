@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Text, View, TextInput, Button } from "react-native";
 import { register } from "../redux/reducers/authReducer";
+import { navigateBack } from "../redux/actions/actionCreators";
 
 class RegisterComponent extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class RegisterComponent extends Component {
   }
 
   render() {
-    const { registerErrorMessage, registerAction } = this.props;
+    const { registerErrorMessage, registerAction, navigateBackAction } = this.props;
     const { email, password, confirmPassword } = this.state;
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -37,6 +38,7 @@ class RegisterComponent extends Component {
           onPress={() => registerAction(email, password)}
         />
         {registerErrorMessage !== null && <Text>{registerErrorMessage}</Text>}
+        <Button title="Back" onPress={() => navigateBackAction()} />
       </View>
     );
   }
@@ -44,7 +46,8 @@ class RegisterComponent extends Component {
 
 RegisterComponent.propTypes = {
   registerErrorMessage: PropTypes.string,
-  registerAction: PropTypes.func.isRequired
+  registerAction: PropTypes.func.isRequired,
+  navigateBackAction: PropTypes.func.isRequired
 };
 
 RegisterComponent.defaultProps = {
@@ -58,6 +61,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  navigateBackAction: () => dispatch(navigateBack()),
   registerAction: (email, password) => dispatch(register(email, password))
 });
 

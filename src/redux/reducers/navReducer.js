@@ -2,7 +2,7 @@ import { NavigationActions } from "react-navigation";
 
 import AppNavigator from "../../navigation/routes";
 import * as screenNames from "../../navigation/screenNames";
-import { GO_TO_REGISTER, LOGIN_SUCCESS } from "../actions/actionTypes";
+import { GO_TO_REGISTER, LOGIN_SUCCESS, NAVIGATE_BACK } from "../actions/actionTypes";
 
 const initialNavState = AppNavigator.router.getStateForAction(
   NavigationActions.navigate({
@@ -24,6 +24,8 @@ const navigationReducer = (state = initialNavState, action) => {
       return AppNavigator.router.getStateForAction(ActionForLoggedIn);
     case GO_TO_REGISTER:
       return AppNavigator.router.getStateForAction(ActionForRegisterScreen);
+    case NAVIGATE_BACK:
+      return AppNavigator.router.getStateForAction(NavigationActions.back());
     default:
       return AppNavigator.router.getStateForAction(action, state) || state;
   }
