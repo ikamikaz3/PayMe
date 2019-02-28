@@ -97,7 +97,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         isRegisterPending: action.isRegisterPending,
         isRegisterSuccessful: false,
-        loginErrorMessage: null
+        registerErrorMessage: null
       };
     case REGISTER_SUCCESS:
       return {
