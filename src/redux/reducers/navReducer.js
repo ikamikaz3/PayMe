@@ -1,8 +1,8 @@
-import { NavigationActions, StackActions } from "react-navigation";
+import { NavigationActions } from "react-navigation";
 
 import AppNavigator from "../../navigation/routes";
 import * as screenNames from "../../navigation/screenNames";
-import { LOGIN_SUCCESS } from "../actions/actionTypes";
+import { GO_TO_REGISTER, LOGIN_SUCCESS } from "../actions/actionTypes";
 
 const initialNavState = AppNavigator.router.getStateForAction(
   NavigationActions.navigate({
@@ -10,47 +10,23 @@ const initialNavState = AppNavigator.router.getStateForAction(
   })
 );
 
+const ActionForLoggedIn = AppNavigator.router.getActionForPathAndParams(
+  "mainFlow"
+);
+
+const ActionForRegisterScreen = AppNavigator.router.getActionForPathAndParams(
+  "loginFlow/Register"
+);
+
 const navigationReducer = (state = initialNavState, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
-      return AppNavigator.router.getStateForAction(
-        NavigationActions.navigate({ routeName: screenNames.HOME })
-      );
+      return AppNavigator.router.getStateForAction(ActionForLoggedIn);
+    case GO_TO_REGISTER:
+      return AppNavigator.router.getStateForAction(ActionForRegisterScreen);
     default:
       return AppNavigator.router.getStateForAction(action, state) || state;
   }
-  /*  switch (action.type) {
-    case "@@redux/INIT":
-      return {
-        ...state,
-        stateForLoggedIn: AppNavigator.router.getStateForAction(
-          actionForLoggedIn,
-          stateForLoggedOut
-        )
-      };
-    case "LOGIN_SUCCESS":
-      return {
-        ...state
-      };
-    case "LOGOUT":
-      return {
-        ...state,
-        stateForLoggedOut: AppNavigator.router.getStateForAction(
-          NavigationActions.reset({
-            index: 0,
-            actions: [NavigationActions.navigate({ routeName: "Login" })]
-          })
-        )
-      };
-    default:
-      return {
-        ...state,
-        stateForLoggedIn: AppNavigator.router.getStateForAction(
-          action,
-          state.stateForLoggedIn
-        )
-      };
-  } */
 };
 
 export default navigationReducer;

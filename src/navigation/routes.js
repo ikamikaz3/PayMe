@@ -1,16 +1,29 @@
-import { createStackNavigator } from "react-navigation";
+import {
+  createStackNavigator,
+  createBottomTabNavigator
+} from "react-navigation";
 
 import * as screenNames from "./screenNames";
 
-import Home from "../components/Home";
+import Register from "../components/Register";
 import Login from "../components/Login";
+import History from "../components/History";
+import Profile from "../components/Profile";
+import Payment from "../components/Payment";
 
 const AppNavigator = createStackNavigator({
-  [screenNames.HOME]: {
-    screen: Home
+  loginFlow: {
+    screen: createStackNavigator({
+      [screenNames.LOGIN]: { screen: Login },
+      [screenNames.REGISTER]: { screen: Register }
+    })
   },
-  [screenNames.LOGIN]: {
-    screen: Login
+  mainFlow: {
+    screen: createBottomTabNavigator({
+      [screenNames.HISTORY]: { screen: History },
+      [screenNames.PROFILE]: { screen: Profile },
+      [screenNames.PAYMENT]: { screen: Payment }
+    })
   }
 });
 

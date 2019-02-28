@@ -2,20 +2,21 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Text, View, Button, TextInput } from "react-native";
 import { connect } from "react-redux";
-import { login } from "../redux/reducers/loginReducer";
+import { login } from "../redux/reducers/authReducer";
+import { goToRegister } from "../redux/actions/actionCreators";
 
 class LoginComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "Enter email",
-      password: "Enter password"
+      email: "admin@example.com",
+      password: "admin"
     };
   }
 
   render() {
     const { email, password } = this.state;
-    const { loginErrorMessage, loginAction } = this.props;
+    const { loginErrorMessage, loginAction, goToRegisterAction } = this.props;
     return (
       <View
         style={{
@@ -35,6 +36,10 @@ class LoginComponent extends Component {
         />
         <Button title="Login" onPress={() => loginAction(email, password)} />
         {loginErrorMessage !== null && <Text>{loginErrorMessage}</Text>}
+        <Button
+          title="Not registered yet?"
+          onPress={() => goToRegisterAction()}
+        />
       </View>
     );
   }
@@ -42,23 +47,23 @@ class LoginComponent extends Component {
 
 LoginComponent.propTypes = {
   loginErrorMessage: PropTypes.string,
-  loginAction: PropTypes.func.isRequired
+  loginAction: PropTypes.func.isRequired,
+  goToRegisterAction: PropTypes.func.isRequired
 };
 
 LoginComponent.defaultProps = {
   loginErrorMessage: null
 };
 
-const mapStateToProps = state => {
-  return {
-    isLoginPending: state.loginReducer.isLoginPending,
-    isLoginSuccessful: state.loginReducer.isLoginSuccessful,
-    loginErrorMessage: state.loginReducer.loginErrorMessage
-  };
-};
+const mapStateToProps = state => ({
+  isLoginPending: state.authReducer.isLoginPending,
+  isLoginSuccessful: state.authReducer.isLoginSuccessful,
+  loginErrorMessage: state.authReducer.loginErrorMessage
+});
 
 const mapDispatchToProps = dispatch => ({
-  loginAction: (email, password) => dispatch(login(email, password))
+  loginAction: (email, password) => dispatch(login(email, password)),
+  goToRegisterAction: () => dispatch(goToRegister())
 });
 
 export default connect(

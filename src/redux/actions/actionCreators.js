@@ -2,7 +2,10 @@ import {
   LOGIN_PENDING,
   LOGIN_SUCCESS,
   LOGIN_ERROR,
-  LOGOUT
+  GO_TO_REGISTER,
+  REGISTER_SUCCESS,
+  REGISTER_PENDING,
+  REGISTER_ERROR
 } from "./actionTypes";
 
 function LoginPending(isLoginPending) {
@@ -26,4 +29,39 @@ function LoginError(loginErrorMessage) {
   };
 }
 
-export { LoginPending, LoginSuccess, LoginError };
+function goToRegister() {
+  return {
+    type: GO_TO_REGISTER
+  };
+}
+
+function registerPending(isRegisterPending) {
+  return {
+    type: REGISTER_PENDING,
+    isRegisterPending
+  };
+}
+
+function registerSuccess(isRegisterSuccessful) {
+  return {
+    type: REGISTER_SUCCESS,
+    isRegisterSuccessful
+  };
+}
+
+function registerError(registerErrorMessage) {
+  return {
+    type: REGISTER_ERROR,
+    registerErrorMessage: registerErrorMessage.toString()
+  };
+}
+
+export {
+  LoginPending,
+  LoginSuccess,
+  LoginError,
+  goToRegister,
+  registerSuccess,
+  registerPending,
+  registerError
+};
