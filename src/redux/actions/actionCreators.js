@@ -35,21 +35,21 @@ function goToRegister() {
   };
 }
 
-function registerPending(isRegisterPending) {
+function RegisterPending(isRegisterPending) {
   return {
     type: REGISTER_PENDING,
     isRegisterPending
   };
 }
 
-function registerSuccess(isRegisterSuccessful) {
+function RegisterSuccess(isRegisterSuccessful) {
   return {
     type: REGISTER_SUCCESS,
     isRegisterSuccessful
   };
 }
 
-function registerError(registerErrorMessage) {
+function RegisterError(registerErrorMessage) {
   return {
     type: REGISTER_ERROR,
     registerErrorMessage: registerErrorMessage.toString()
@@ -61,7 +61,7 @@ export {
   LoginSuccess,
   LoginError,
   goToRegister,
-  registerSuccess,
-  registerPending,
-  registerError
+  RegisterSuccess,
+  RegisterPending,
+  RegisterError
 };
