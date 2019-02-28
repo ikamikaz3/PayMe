@@ -2,7 +2,11 @@ import { NavigationActions } from "react-navigation";
 
 import AppNavigator from "../../navigation/routes";
 import * as screenNames from "../../navigation/screenNames";
-import { GO_TO_REGISTER, LOGIN_SUCCESS, NAVIGATE_BACK } from "../actions/actionTypes";
+import {
+  GO_TO_REGISTER,
+  LOGIN_SUCCESS,
+  NAVIGATE_BACK
+} from "../actions/actionTypes";
 
 const initialNavState = AppNavigator.router.getStateForAction(
   NavigationActions.navigate({

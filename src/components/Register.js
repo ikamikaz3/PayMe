@@ -16,7 +16,11 @@ class RegisterComponent extends Component {
   }
 
   render() {
-    const { registerErrorMessage, registerAction, navigateBackAction } = this.props;
+    const {
+      registerErrorMessage,
+      registerAction,
+      navigateBackAction
+    } = this.props;
     const { email, password, confirmPassword } = this.state;
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
