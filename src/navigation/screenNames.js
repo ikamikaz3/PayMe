@@ -1,4 +1,7 @@
-const HOME = "HOME";
+const REGISTER = "REGISTER";
 const LOGIN = "LOGIN";
+const HISTORY = "HISTORY";
+const PAYMENT = "PAYMENT";
+const PROFILE = "PROFILE";
 
-export { HOME, LOGIN };
+export { REGISTER, LOGIN, HISTORY, PAYMENT, PROFILE };
