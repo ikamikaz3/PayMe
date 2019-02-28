@@ -23,6 +23,8 @@ See [Get Started](https://expo.io/learn) for steps to install `expo-cli` and sta
 
 ## Installation
 
+Note: you can use your favorite package manager: just replace `yarn` with `npm` for exemple.
+
 - Install package dependencies :
 ```
 yarn install
