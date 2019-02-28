@@ -10,9 +10,9 @@ import {
   LoginSuccess,
   LoginError,
   LoginPending,
-  registerPending,
-  registerSuccess,
-  registerError
+  RegisterPending,
+  RegisterSuccess,
+  RegisterError
 } from "../actions/actionCreators";
 
 function callLoginApi(email, password, callback) {
@@ -50,15 +50,15 @@ export function login(email, password) {
 
 export function register(email, password) {
   return dispatch => {
-    dispatch(registerPending(true));
+    dispatch(RegisterPending(true));
 
     callRegisterApi(email, password, error => {
-      dispatch(registerPending(false));
+      dispatch(RegisterPending(false));
       if (!error) {
-        dispatch(registerSuccess(true));
+        dispatch(RegisterSuccess(true));
         dispatch(LoginSuccess(true));
       } else {
-        dispatch(registerError(error));
+        dispatch(RegisterError(error));
       }
     });
   };

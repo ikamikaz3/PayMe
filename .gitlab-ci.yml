@@ -1,13 +1,33 @@
+image: node:alpine
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - ~/.yarn
+    - .jest
+
+stages:
+  - test
+  - deploy
+
 before_script:
-  - "npm install"
+  - sysctl -w fs.inotify.max_user_watches=524288
 
-build:
-  script: "npm start"
+jest-tests:
+  before_script:
+    - yarn install --frozen-lockfile
+  stage: test
+  script:
+    - yarn jest --ci
 
-test:
-  script: "jest"
-
-#deploy:
-# https://docs.expo.io/versions/latest/guides/setting-up-continuous-integration
-#  - Expo login avec account
-#  - Expo publish
+expo-deploy:
+  before_script:
+    - yarn add --dev expo-cli
+  stage: deploy
+  only:
+    refs:
+      - master
+  script:
+    - apk add --no-cache bash
+    - yarn expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
+    - yarn expo publish --non-interactive
