@@ -35,7 +35,11 @@ const ActionForCollectScreen = AppNavigator.router.getActionForPathAndParams(
 
 const ResetAction = StackActions.reset({
   index: 0,
-  actions: [NavigationActions.navigate({ routeName: "loginFlow/Login" })]
+  actions: [
+    NavigationActions.navigate({
+      routeName: `${screenNames.AUTHSTACK}/${screenNames.LOGIN}`
+    })
+  ]
 });
 
 const navigationReducer = (state = initialNavState, action) => {
