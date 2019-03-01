@@ -10,21 +10,43 @@ import Login from "../components/Login";
 import History from "../components/History";
 import Profile from "../components/Profile";
 import Payment from "../components/Payment";
+import Pay from "../components/Pay";
+import Collect from "../components/Collect";
 
-const AppNavigator = createStackNavigator({
-  loginFlow: {
-    screen: createStackNavigator({
-      [screenNames.LOGIN]: { screen: Login },
-      [screenNames.REGISTER]: { screen: Register }
-    })
+const AppNavigator = createStackNavigator(
+  {
+    [screenNames.AUTHSTACK]: {
+      screen: createStackNavigator({
+        [screenNames.LOGIN]: { screen: Login },
+        [screenNames.REGISTER]: { screen: Register }
+      })
+    },
+    [screenNames.MAINSTACK]: {
+      screen: createBottomTabNavigator(
+        {
+          [screenNames.HISTORY]: { screen: History },
+          [screenNames.PROFILE]: { screen: Profile },
+          [screenNames.WALLETSTACK]: {
+            screen: createStackNavigator({
+              [screenNames.PAYMENT]: { screen: Payment },
+              [screenNames.PAY]: { screen: Pay },
+              [screenNames.COLLECT]: { screen: Collect }
+            })
+          }
+        },
+        {
+          order: [
+            screenNames.WALLETSTACK,
+            screenNames.PROFILE,
+            screenNames.HISTORY
+          ]
+        }
+      )
+    }
   },
-  mainFlow: {
-    screen: createBottomTabNavigator({
-      [screenNames.HISTORY]: { screen: History },
-      [screenNames.PROFILE]: { screen: Profile },
-      [screenNames.PAYMENT]: { screen: Payment }
-    })
+  {
+    navigationOptions: () => ({ header: null })
   }
-});
+);
 
 export default AppNavigator;

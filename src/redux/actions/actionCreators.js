@@ -2,11 +2,14 @@ import {
   LOGIN_PENDING,
   LOGIN_SUCCESS,
   LOGIN_ERROR,
+  LOGOUT,
   GO_TO_REGISTER,
   REGISTER_SUCCESS,
   REGISTER_PENDING,
   REGISTER_ERROR,
-  NAVIGATE_BACK
+  NAVIGATE_BACK,
+  GO_TO_PAY,
+  GO_TO_COLLECT
 } from "./actionTypes";
 
 function LoginPending(isLoginPending) {
@@ -27,6 +30,12 @@ function LoginError(loginErrorMessage) {
   return {
     type: LOGIN_ERROR,
     loginErrorMessage: loginErrorMessage.toString()
+  };
+}
+
+function Logout() {
+  return {
+    type: LOGOUT
   };
 }
 
@@ -57,9 +66,21 @@ function RegisterError(registerErrorMessage) {
   };
 }
 
-function navigateBack() {
+function NavigateBack() {
   return {
     type: NAVIGATE_BACK
+  };
+}
+
+function GoToPay() {
+  return {
+    type: GO_TO_PAY
+  };
+}
+
+function GoToCollect() {
+  return {
+    type: GO_TO_COLLECT
   };
 }
 
@@ -67,9 +88,12 @@ export {
   LoginPending,
   LoginSuccess,
   LoginError,
+  Logout,
   goToRegister,
   RegisterSuccess,
   RegisterPending,
   RegisterError,
-  navigateBack
+  NavigateBack,
+  GoToCollect,
+  GoToPay
 };

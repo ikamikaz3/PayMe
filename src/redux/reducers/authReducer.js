@@ -2,6 +2,7 @@ import {
   LOGIN_ERROR,
   LOGIN_PENDING,
   LOGIN_SUCCESS,
+  LOGOUT,
   REGISTER_ERROR,
   REGISTER_PENDING,
   REGISTER_SUCCESS
@@ -91,6 +92,11 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         loginErrorMessage: action.loginErrorMessage
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        ...initialState
       };
     case REGISTER_PENDING:
       return {
