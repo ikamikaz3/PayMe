@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Text, View, Button, TextInput } from "react-native";
 import { connect } from "react-redux";
-import { login } from "../redux/reducers/authReducer";
+import { login } from "../api/firebaseAuthentication";
 import { goToRegister } from "../redux/actions/actionCreators";
 
 class LoginComponent extends Component {

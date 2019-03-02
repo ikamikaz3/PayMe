@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { BarCodeScanner, Permissions } from "expo";
+import { createPayment } from "../api/firebaseDatabase";
 
 class Pay extends Component {
   constructor(props) {
@@ -19,6 +20,11 @@ class Pay extends Component {
     console.log(
       `Bar code with type ${type} and data ${data} has been scanned!`
     );
+    const newPayment = {
+      amount: 100,
+      type: "payment"
+    };
+    createPayment(newPayment, data);
   };
 
   render() {
