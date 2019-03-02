@@ -5,13 +5,13 @@ import {
 
 import * as screenNames from "./screenNames";
 
-import Register from "../components/Register";
-import Login from "../components/Login";
-import History from "../components/History";
-import Profile from "../components/Profile";
-import Payment from "../components/Payment";
-import Pay from "../components/Pay";
-import Collect from "../components/Collect";
+import Register from "../containers/Register";
+import Login from "../containers/Login";
+import History from "../containers/History";
+import Profile from "../containers/Profile";
+import Payment from "../containers/Payment";
+import Pay from "../containers/Pay";
+import Collect from "../containers/Collect";
 
 const AppNavigator = createStackNavigator(
   {

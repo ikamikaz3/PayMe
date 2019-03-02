@@ -9,11 +9,13 @@
     "test": "./node_modules/.bin/jest"
   },
   "dependencies": {
+    "babel-eslint": "^10.0.1",
     "eslint-plugin-jest": "^22.3.0",
     "expo": "^32.0.0",
     "prop-types": "^15.6.2",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+    "react-native-qrcode": "^0.2.7",
     "react-navigation": "^2.3.0",
     "react-navigation-redux-helpers": "^2.0.0-beta",
     "react-redux": "^6.0.0",

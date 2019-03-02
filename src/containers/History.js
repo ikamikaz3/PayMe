@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-import SwipeableList from "./SwipeableList";
+import SwipeableList from "../components/SwipeableList";
 
 const listData = [
   { key: "1. element" },
