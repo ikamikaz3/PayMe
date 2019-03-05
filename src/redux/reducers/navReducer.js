@@ -18,7 +18,7 @@ const initialNavState = AppNavigator.router.getStateForAction(
 );
 
 const ActionForLoggedIn = AppNavigator.router.getActionForPathAndParams(
-  `${screenNames.MAINSTACK}/${screenNames.WALLETSTACK}`
+  `${screenNames.MAINSTACK}/${screenNames.WALLETSTACK}` // Brancher le screen principal
 );
 
 const ActionForRegisterScreen = AppNavigator.router.getActionForPathAndParams(

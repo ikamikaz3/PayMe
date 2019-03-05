@@ -9,9 +9,11 @@ import Register from "../containers/Register";
 import Login from "../containers/Login";
 import History from "../containers/History";
 import Profile from "../containers/Profile";
-import Payment from "../containers/Payment";
+// import Payment from "../containers/Payment";
 import Pay from "../containers/Pay";
 import Collect from "../containers/Collect";
+
+import Home from "../screens/HomeScreen.js";
 
 const AppNavigator = createStackNavigator(
   {
@@ -28,7 +30,7 @@ const AppNavigator = createStackNavigator(
           [screenNames.PROFILE]: { screen: Profile },
           [screenNames.WALLETSTACK]: {
             screen: createStackNavigator({
-              [screenNames.PAYMENT]: { screen: Payment },
+              [screenNames.HOME]: { screen: Home },
               [screenNames.PAY]: { screen: Pay },
               [screenNames.COLLECT]: { screen: Collect }
             })
