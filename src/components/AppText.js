@@ -19,7 +19,11 @@ class AppText extends React.Component {
   render() {
     const { props } = PropTypes.objectOf(this.props);
 
-    return <Text style={[styles.baseText, props.style]}>{props.children}</Text>;
+    return (
+      <Text style={[styles.baseText, props.style ? props.style : null]}>
+        {props.children}
+      </Text>
+    );
   }
 }
 
