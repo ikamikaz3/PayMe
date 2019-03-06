@@ -1,12 +1,11 @@
 import React from "react";
-import View from "react-native";
+import { View, Text } from "react-native";
 import { Provider } from "react-redux";
-import { Font, Icon } from "expo";
+import { AppLoading, Font, Icon } from "expo";
 import PropTypes from "prop-types";
 
 import { AppWithNavigationState } from "./navigation";
 import store from "./redux/store";
-import AppText from "./components/AppText";
 
 const fontPath = require("../assets/fonts/OpenSans-SemiBold.ttf");
 
@@ -18,7 +17,17 @@ class App extends React.Component {
     };
   }
 
-  _loadResourcesAsync = async () => {
+  // async componentWillMount() {
+  //   await Font.loadAsync({
+  //     ...Icon.Ionicons.font,
+  //     openSansSemiBold: fontPath
+  //   });
+  //   console.log(this.state);
+  //   this.setState({ isLoadingComplete: true });
+  //   console.log(this.state);
+  // }
+
+  loadResourcesAsync = async () => {
     Promise.all([
       Font.loadAsync({
         ...Icon.Ionicons.font,
@@ -27,13 +36,11 @@ class App extends React.Component {
     ]);
   };
 
-  // _handleLoadingError = error => {
-  //   // In this case, you might want to report the error to your error
-  //   // reporting service, for example Sentry
+  // handleLoadingError = error => {
   //   console.warn(error);
   // };
 
-  _handleFinishLoading = () => {
+  handleFinishLoading = () => {
     this.setState({ isLoadingComplete: true });
   };
 
@@ -43,15 +50,17 @@ class App extends React.Component {
 
     if (!isLoadingComplete && !props) {
       return (
-        <Provider store={store}>
-          <AppWithNavigationState />
-        </Provider>
+        <AppLoading
+          startAsync={this.loadResourcesAsync}
+          // onError={this.handleLoadingError}
+          onFinish={this.handleFinishLoading}
+        />
       );
     }
     return (
-      <View>
-        <AppText> Loading Application ...</AppText>
-      </View>
+      <Provider store={store}>
+        <AppWithNavigationState />
+      </Provider>
     );
   }
 }

@@ -7,13 +7,14 @@ import * as screenNames from "./screenNames";
 
 import Register from "../containers/Register";
 import Login from "../containers/Login";
-import History from "../containers/History";
+// import History from "../containers/History";
 import Profile from "../containers/Profile";
 // import Payment from "../containers/Payment";
 import Pay from "../containers/Pay";
 import Collect from "../containers/Collect";
 
 import Home from "../screens/HomeScreen";
+import History from "../screens/HistoryScreen";
 
 const AppNavigator = createStackNavigator(
   {
@@ -39,8 +40,8 @@ const AppNavigator = createStackNavigator(
         {
           order: [
             screenNames.WALLETSTACK,
-            screenNames.PROFILE,
-            screenNames.HISTORY
+            screenNames.HISTORY,
+            screenNames.PROFILE
           ]
         }
       )

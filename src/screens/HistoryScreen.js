@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { ScrollView, StyleSheet } from "react-native";
 import HistEntry from "../components/HistEntry";
 
@@ -12,7 +13,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class HistoryScreen extends React.Component {
+class HistoryScreen extends React.Component {
   static navigationOptions = {
     title: "Paiment History",
     headerTitleStyle: {
@@ -25,6 +26,7 @@ export default class HistoryScreen extends React.Component {
     return (
       <ScrollView style={styles.container}>
         <HistEntry company="MacDonald's" amount={10.99} date="Today" />
+        {/* <HistEntry company="MacDonald's" amount={10.99} date="Today" />
         <HistEntry company="MacDonald's" amount={10.99} date="Today" />
         <HistEntry company="MacDonald's" amount={10.99} date="Today" />
         <HistEntry company="MacDonald's" amount={10.99} date="Today" />
@@ -32,9 +34,13 @@ export default class HistoryScreen extends React.Component {
         <HistEntry company="MacDonald's" amount={10.99} date="Today" />
         <HistEntry company="MacDonald's" amount={10.99} date="Today" />
         <HistEntry company="MacDonald's" amount={10.99} date="Today" />
-        <HistEntry company="MacDonald's" amount={10.99} date="Today" />
-        <HistEntry company="MacDonald's" amount={10.99} date="Today" />
+        <HistEntry company="MacDonald's" amount={10.99} date="Today" /> */}
       </ScrollView>
     );
   }
 }
+
+export default connect(
+  null,
+  null
+)(HistoryScreen);
