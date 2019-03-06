@@ -13,7 +13,7 @@ import Profile from "../containers/Profile";
 import Pay from "../containers/Pay";
 import Collect from "../containers/Collect";
 
-import Home from "../screens/HomeScreen.js";
+import Home from "../screens/HomeScreen";
 
 const AppNavigator = createStackNavigator(
   {

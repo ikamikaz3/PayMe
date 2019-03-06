@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 
 import AppText from "../components/AppText";
 // import Contact from "../components/Contact";
@@ -75,7 +74,16 @@ class HomeScreen extends React.Component {
   }
 }
 
-HomeScreen.propTypes = { types: PropTypes.string.isRequired };
+// const mapStateToProps = state => ({
+//   isLoginPending: state.authReducer.isLoginPending,
+//   isLoginSuccessful: state.authReducer.isLoginSuccessful,
+//   loginErrorMessage: state.authReducer.loginErrorMessage
+// });
+
+// const mapDispatchToProps = dispatch => ({
+//   loginAction: (email, password) => dispatch(login(email, password)),
+//   goToRegisterAction: () => dispatch(goToRegister())
+// });
 
 export default connect(
   null,

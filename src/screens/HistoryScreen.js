@@ -2,6 +2,16 @@ import React from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import HistEntry from "../components/HistEntry";
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: 20,
+    marginLeft: 20,
+    marginRight: 20,
+    backgroundColor: "#fff"
+  }
+});
+
 export default class HistoryScreen extends React.Component {
   static navigationOptions = {
     title: "Paiment History",
@@ -28,13 +38,3 @@ export default class HistoryScreen extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 20,
-    marginLeft: 20,
-    marginRight: 20,
-    backgroundColor: "#fff"
-  }
-});

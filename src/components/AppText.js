@@ -1,15 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { StyleSheet, Text } from "react-native";
-
-export default class AppText extends React.Component {
-  render() {
-    return (
-      <Text style={[styles.baseText, this.props.style]}>
-        {this.props.children}
-      </Text>
-    );
-  }
-}
 
 const styles = StyleSheet.create({
   baseText: {
@@ -18,3 +9,18 @@ const styles = StyleSheet.create({
     color: "#000"
   }
 });
+
+class AppText extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props } = PropTypes.objectOf(this.props);
+
+    return <Text style={[styles.baseText, props.style]}>{props.children}</Text>;
+  }
+}
+
+export default AppText;

@@ -3,7 +3,8 @@ import { View, StyleSheet, TouchableOpacity, Image } from "react-native";
 import PropTypes from "prop-types";
 import AppText from "./AppText";
 
-const imgPath = "../../assets/images/";
+const send = require("../../assets/images/sendMoney.png");
+const recv = require("../../assets/images/receiveMoney.png");
 
 const styles = StyleSheet.create({
   buttons: {
@@ -34,32 +35,31 @@ class MoneyButton extends React.Component {
       return (
         <TouchableOpacity
           style={styles.buttons}
-          onPress={() => alert("Opening QRCode Scanner to pay...")}
+          // onPress={() => alert("Opening QRCode Scanner to pay...")}
         >
-          <Image
-            style={styles.money}
-            source={require(imgPath + "sendMoney.png")}
-          />
+          <Image style={styles.money} source={send} />
           <AppText style={styles.fontSize}> Pay </AppText>
         </TouchableOpacity>
       );
-    } else if (type === "collect") {
+    }
+    if (type === "collect") {
       return (
         <View>
           <TouchableOpacity
             style={styles.buttons}
-            onPress={() =>
-              alert("Displaying QRCode to be scanned then collect money...")
-            }
+            // onPress={() => alert("Displaying QRCode to be scanned then collect money...")}
           >
-            <Image
-              style={styles.money}
-              source={require(imgPath + "receiveMoney.png")}
-            />
+            <Image style={styles.money} source={recv} />
             <AppText style={styles.text}> Collect </AppText>
           </TouchableOpacity>
         </View>
       );
+    }
+    return (
+      <View>
+        <AppText>Wrong type prop</AppText>
+      </View>
+    );
   }
 }
 

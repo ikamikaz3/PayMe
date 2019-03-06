@@ -16,6 +16,7 @@ const WALLETSTACK = "WALLET";
 export {
   REGISTER,
   LOGIN,
+  HOME,
   HISTORY,
   PAYMENT,
   PROFILE,
