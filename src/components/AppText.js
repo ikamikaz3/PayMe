@@ -18,18 +18,29 @@ class AppText extends React.Component {
 
   render() {
     const { props } = PropTypes.objectOf(this.props);
-    const { children } = this.props;
+    // const children = this.props.children;
 
     // Props don't exist
-    if (typeof props === "undefined")
+    if (typeof props === "undefined") {
+      console.log("Props are always undefined");
       return (
         <View>
-          <Text style={[styles.baseText]}>{children}</Text>
-          {/* <Text>SOME TEXT</Text> */}
+          {/* //   <Text style={[styles.baseText]}>{children}</Text> */}
+          <Text style={[styles.baseText, this.props.style]}>
+            {this.props.children}
+          </Text>
         </View>
       );
+    }
     // Props exist
-    return <Text style={[styles.baseText, props]}>{children}</Text>;
+    return (
+      <View>
+        {/* <Text style={[styles.baseText, props]}>{children}</Text>; */}
+        {/* <Text style={[styles.baseText, this.props.style]}>
+          {this.props.children} */}
+        {/* </Text> */}
+      </View>
+    );
   }
 }
 

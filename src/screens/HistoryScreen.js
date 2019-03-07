@@ -26,7 +26,6 @@ class HistoryScreen extends React.Component {
     return (
       <ScrollView style={styles.container}>
         <HistEntry company="MacDonald's" amount={10.99} date="Today" />
-        {/* <HistEntry company="MacDonald's" amount={10.99} date="Today" />
         <HistEntry company="MacDonald's" amount={10.99} date="Today" />
         <HistEntry company="MacDonald's" amount={10.99} date="Today" />
         <HistEntry company="MacDonald's" amount={10.99} date="Today" />
@@ -34,7 +33,8 @@ class HistoryScreen extends React.Component {
         <HistEntry company="MacDonald's" amount={10.99} date="Today" />
         <HistEntry company="MacDonald's" amount={10.99} date="Today" />
         <HistEntry company="MacDonald's" amount={10.99} date="Today" />
-        <HistEntry company="MacDonald's" amount={10.99} date="Today" /> */}
+        <HistEntry company="MacDonald's" amount={10.99} date="Today" />
+        <HistEntry company="MacDonald's" amount={10.99} date="Today" />
       </ScrollView>
     );
   }
