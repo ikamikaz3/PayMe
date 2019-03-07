@@ -1,5 +1,4 @@
 import React from "react";
-import { View, Text } from "react-native";
 import { Provider } from "react-redux";
 import { AppLoading, Font, Icon } from "expo";
 import PropTypes from "prop-types";

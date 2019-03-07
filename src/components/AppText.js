@@ -2,6 +2,22 @@ import React from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, View, Text } from "react-native";
 
+class AppText extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { styles, children } = this.props;
+    return (
+      <View>
+        <Text style={[styles.baseText]}>{children}</Text>
+      </View>
+    );
+  }
+}
+
 const styles = StyleSheet.create({
   baseText: {
     fontFamily: "openSansSemiBold",
@@ -10,42 +26,19 @@ const styles = StyleSheet.create({
   }
 });
 
-class AppText extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+AppText.propTypes = {
+  styles: PropTypes.shape({
+    baseText: PropTypes.arrayOf({
+      fontFamily: PropTypes.string.isRequired,
+      fontSize: PropTypes.number.isRequired,
+      color: PropTypes.string.isRequired
+    }).isRequired
+  }),
+  children: PropTypes.string.isRequired
+};
 
-  render() {
-    const { props } = PropTypes.objectOf(this.props);
-    // const children = this.props.children;
-
-    // Props don't exist
-    if (typeof props === "undefined") {
-      console.log("Props are always undefined");
-      return (
-        <View>
-          {/* //   <Text style={[styles.baseText]}>{children}</Text> */}
-          <Text style={[styles.baseText, this.props.style]}>
-            {this.props.children}
-          </Text>
-        </View>
-      );
-    }
-    // Props exist
-    return (
-      <View>
-        {/* <Text style={[styles.baseText, props]}>{children}</Text>; */}
-        {/* <Text style={[styles.baseText, this.props.style]}>
-          {this.props.children} */}
-        {/* </Text> */}
-      </View>
-    );
-  }
-}
-
-AppText.PropType = {
-  children: PropTypes.node
+AppText.defaultProps = {
+  styles
 };
 
 export default AppText;
