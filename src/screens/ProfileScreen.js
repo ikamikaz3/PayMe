@@ -1,66 +1,10 @@
-// import React from "react";
-// import { View, Text } from "react-native";
-
-// export default class SettingsScreen extends React.Component {
-//   static navigationOptions = {
-//     title: "Profile",
-//     headerTitleStyle: {
-//       flex: 1,
-//       textAlign: "center"
-//     }
-//   };
-
-//   render() {
-//     return (
-//       <View>
-//         <Text> Merge ton ecran ici </Text>
-//       </View>
-//     );
-//   }
-// }
-
-const Fonts = { vintage: "regular" };
 import React, { Component } from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { connect } from "react-redux";
 
-export default class ProfileScreen extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.digiTitre}>My digi Pay </Text>
-        </View>
-        <Image
-          style={styles.avatar}
-          source={{ uri: "https://bootdey.com/img/Content/avatar/avatar6.png" }}
-        />
-        <View style={styles.body}>
-          <View style={styles.bodyContent}>
-            <Text style={styles.name}>John Doe rgrr</Text>
-            <Text style={styles.info}>UX Designer / Mobile developer</Text>
-            <Text style={styles.description}>
-              Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum
-              electram expetendis, omittam deseruisse consequuntur ius an,
-            </Text>
+import AppText from "../components/AppText";
 
-            <TouchableOpacity style={styles.buttonContainer}>
-              <Text>Prenom</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonContainer}>
-              <Text>Nom</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonContainer}>
-              <Text>mail</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonContainer}>
-              <Text>Tel</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-    );
-  }
-}
+//const Fonts = { vintage: "regular" };
 
 const styles = StyleSheet.create({
   header: {
@@ -138,3 +82,61 @@ const styles = StyleSheet.create({
     backgroundColor: "#00BFFF"
   }
 });
+
+class ProfileScreen extends Component {
+  // Doesn't work
+  static navigationOptions = {
+    title: "Profile",
+    headerTitleStyle: {
+      flex: 1,
+      textAlign: "center"
+    }
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.digiTitre}>My digi Pay </Text>
+        </View>
+        <Image
+          style={styles.avatar}
+          source={{ uri: "https://bootdey.com/img/Content/avatar/avatar6.png" }}
+        />
+        <View style={styles.body}>
+          <View style={styles.bodyContent}>
+            <Text style={styles.name}>John Doe rgrr</Text>
+            <Text style={styles.info}>UX Designer / Mobile developer</Text>
+            <Text style={styles.description}>
+              Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum
+              electram expetendis, omittam deseruisse consequuntur ius an,
+            </Text>
+
+            <TouchableOpacity style={styles.buttonContainer}>
+              <Text>Prenom</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonContainer}>
+              <Text>Nom</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonContainer}>
+              <Text>mail</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonContainer}>
+              <Text>Tel</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    );
+  }
+}
+
+export default connect(
+  null,
+  null
+)(ProfileScreen);

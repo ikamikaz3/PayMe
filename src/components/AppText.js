@@ -20,8 +20,6 @@ class AppText extends React.Component {
     const { props } = PropTypes.objectOf(this.props);
     const { children } = this.props;
 
-    console.log(props);
-
     // Props don't exist
     if (typeof props === "undefined")
       return (
