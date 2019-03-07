@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 
-import AppText from "../components/AppText";
-
-//const Fonts = { vintage: "regular" };
+// const Fonts = { vintage: "regular" };
 
 const styles = StyleSheet.create({
   header: {
@@ -53,11 +51,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     padding: 30
-  },
-  name: {
-    fontSize: 28,
-    color: "#696969",
-    fontWeight: "600"
   },
   info: {
     fontSize: 16,

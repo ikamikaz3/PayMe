@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import {
   Text,
   View,
-  Button,
   TextInput,
   StyleSheet,
   TouchableOpacity,
@@ -12,101 +11,6 @@ import {
 import { connect } from "react-redux";
 import { login } from "../redux/reducers/authReducer";
 import { goToRegister } from "../redux/actions/actionCreators";
-
-class LoginComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: "admin@example.com",
-      password: "admin"
-    };
-  }
-
-  render() {
-    const { email, password } = this.state;
-    const { loginErrorMessage, loginAction, goToRegisterAction } = this.props;
-    return (
-      <View
-        style={{
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "#00BFFF"
-        }}
-      >
-        <Image
-          style={styles.avatar}
-          source={{
-            uri:
-              "https://img.freepik.com/free-vector/hand-holding-smartphone-scan-qr-code-pay_32996-137.jpg?size=338&ext=jpg"
-          }}
-        />
-
-        <Text style={styles.digiTitre}>My digi Pay </Text>
-
-        <View style={styles.inputContainer}>
-          <TextInput
-            keyboardType="email-address"
-            underlineColorAndroid="transparent"
-            value={email}
-            onChangeText={text => this.setState({ email: text })}
-          />
-        </View>
-
-        <View style={styles.inputContainer}>
-          <TextInput
-            value={password}
-            onChangeText={text => this.setState({ password: text })}
-          />
-        </View>
-
-        <TouchableOpacity
-          style={[styles.buttonContainer, styles.loginButton]}
-          title="Login"
-          onPress={() => loginAction(email, password)}
-        >
-          <Text>Login</Text>
-
-          {loginErrorMessage !== null && <Text>{loginErrorMessage}</Text>}
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[styles.buttonContainer, styles.notRegisterStyle]}
-          title="Not registered yet?"
-          onPress={() => goToRegisterAction()}
-        >
-          <Text>Not registered yet !</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
-}
-
-LoginComponent.propTypes = {
-  loginErrorMessage: PropTypes.string,
-  loginAction: PropTypes.func.isRequired,
-  goToRegisterAction: PropTypes.func.isRequired
-};
-
-LoginComponent.defaultProps = {
-  loginErrorMessage: null
-};
-
-const mapStateToProps = state => ({
-  isLoginPending: state.authReducer.isLoginPending,
-  isLoginSuccessful: state.authReducer.isLoginSuccessful,
-  loginErrorMessage: state.authReducer.loginErrorMessage
-});
-
-const mapDispatchToProps = dispatch => ({
-  loginAction: (email, password) => dispatch(login(email, password)),
-  goToRegisterAction: () => dispatch(goToRegister())
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LoginComponent);
 
 const resizeMode = "center";
 
@@ -232,3 +136,98 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   }
 });
+
+class LoginComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "admin@example.com",
+      password: "admin"
+    };
+  }
+
+  render() {
+    const { email, password } = this.state;
+    const { loginErrorMessage, loginAction, goToRegisterAction } = this.props;
+    return (
+      <View
+        style={{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "#00BFFF"
+        }}
+      >
+        <Image
+          style={styles.avatar}
+          source={{
+            uri:
+              "https://img.freepik.com/free-vector/hand-holding-smartphone-scan-qr-code-pay_32996-137.jpg?size=338&ext=jpg"
+          }}
+        />
+
+        <Text style={styles.digiTitre}>My digi Pay </Text>
+
+        <View style={styles.inputContainer}>
+          <TextInput
+            keyboardType="email-address"
+            underlineColorAndroid="transparent"
+            value={email}
+            onChangeText={text => this.setState({ email: text })}
+          />
+        </View>
+
+        <View style={styles.inputContainer}>
+          <TextInput
+            value={password}
+            onChangeText={text => this.setState({ password: text })}
+          />
+        </View>
+
+        <TouchableOpacity
+          style={[styles.buttonContainer, styles.loginButton]}
+          title="Login"
+          onPress={() => loginAction(email, password)}
+        >
+          <Text>Login</Text>
+
+          {loginErrorMessage !== null && <Text>{loginErrorMessage}</Text>}
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.buttonContainer, styles.notRegisterStyle]}
+          title="Not registered yet?"
+          onPress={() => goToRegisterAction()}
+        >
+          <Text>Not registered yet !</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+}
+
+LoginComponent.propTypes = {
+  loginErrorMessage: PropTypes.string,
+  loginAction: PropTypes.func.isRequired,
+  goToRegisterAction: PropTypes.func.isRequired
+};
+
+LoginComponent.defaultProps = {
+  loginErrorMessage: null
+};
+
+const mapStateToProps = state => ({
+  isLoginPending: state.authReducer.isLoginPending,
+  isLoginSuccessful: state.authReducer.isLoginSuccessful,
+  loginErrorMessage: state.authReducer.loginErrorMessage
+});
+
+const mapDispatchToProps = dispatch => ({
+  loginAction: (email, password) => dispatch(login(email, password)),
+  goToRegisterAction: () => dispatch(goToRegister())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginComponent);

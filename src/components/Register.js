@@ -5,12 +5,13 @@ import {
   Text,
   View,
   TextInput,
-  Button,
   StyleSheet,
   TouchableOpacity,
   Image
 } from "react-native";
 import { register } from "../redux/reducers/authReducer";
+
+const resizeMode = "center";
 
 class RegisterComponent extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class RegisterComponent extends Component {
   }
 
   render() {
-    const { registerErrorMessage, registerAction } = this.props;
+    const { styles, registerErrorMessage, registerAction } = this.props;
     const { email, password, confirmPassword } = this.state;
     return (
       <View
@@ -101,32 +102,6 @@ class RegisterComponent extends Component {
   }
 }
 
-const resizeMode = "center";
-
-RegisterComponent.propTypes = {
-  registerErrorMessage: PropTypes.string,
-  registerAction: PropTypes.func.isRequired
-};
-
-RegisterComponent.defaultProps = {
-  registerErrorMessage: null
-};
-
-const mapStateToProps = state => ({
-  isRegisterPending: state.authReducer.isRegisterPending,
-  isRegisterSuccessful: state.authReducer.isRegisterSuccessful,
-  registerErrorMessage: state.authReducer.registerErrorMessage
-});
-
-const mapDispatchToProps = dispatch => ({
-  registerAction: (email, password) => dispatch(register(email, password))
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(RegisterComponent);
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -183,7 +158,7 @@ const styles = StyleSheet.create({
     height: 30,
     marginRight: 2
 
-    //justifyContent: 'center'
+    // justifyContent: 'center'
   },
 
   digiTitre: {
@@ -249,3 +224,29 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   }
 });
+
+RegisterComponent.propTypes = {
+  registerErrorMessage: PropTypes.string,
+  registerAction: PropTypes.func.isRequired,
+  styles
+};
+
+RegisterComponent.defaultProps = {
+  registerErrorMessage: null,
+  styles
+};
+
+const mapStateToProps = state => ({
+  isRegisterPending: state.authReducer.isRegisterPending,
+  isRegisterSuccessful: state.authReducer.isRegisterSuccessful,
+  registerErrorMessage: state.authReducer.registerErrorMessage
+});
+
+const mapDispatchToProps = dispatch => ({
+  registerAction: (email, password) => dispatch(register(email, password))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RegisterComponent);

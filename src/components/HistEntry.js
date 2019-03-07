@@ -1,8 +1,39 @@
 import React from "react";
-import { StyleSheet, View, Platform, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Platform } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import PropTypes from "prop-types";
 import AppText from "./AppText";
+
+class HistEntry extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { styles, company, date, amount } = this.props;
+    return (
+      <View style={styles.card}>
+        <View style={styles.logo}>
+          <Ionicons
+            name={Platform.OS === "ios" ? "ios-card" : "md-card"}
+            size={55}
+          />
+        </View>
+        <View style={styles.target}>
+          <AppText style={styles.text}>{company}</AppText>
+          <AppText style={styles.text}>{date}</AppText>
+        </View>
+        <View style={styles.amount}>
+          <AppText style={styles.text}>
+            -€
+            {amount}
+          </AppText>
+        </View>
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   card: {
@@ -31,37 +62,14 @@ const styles = StyleSheet.create({
   }
 });
 
-class HistEntry extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    return (
-      <View style={styles.card}>
-        <View style={styles.logo}>
-          <Ionicons
-            name={Platform.OS === "ios" ? "ios-card" : "md-card"}
-            size={55}
-          />
-        </View>
-        <View style={styles.target}>
-          <AppText style={styles.text}>{this.props.company}</AppText>
-          <AppText style={styles.text}>{this.props.date}</AppText>
-        </View>
-        <View style={styles.amount}>
-          <AppText style={styles.text}>-€{this.props.amount}</AppText>
-        </View>
-      </View>
-    );
-  }
-}
-
 HistEntry.propTypes = {
-  company: PropTypes.string,
-  date: PropTypes.string,
-  amount: PropTypes.number
+  company: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  amount: PropTypes.number.isRequired,
+  styles
 };
 
+HistEntry.defaultProps = {
+  styles
+};
 export default HistEntry;
