@@ -1,31 +1,63 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Text, View, Button } from "react-native";
-import { GoToCollect, GoToPay } from "../redux/actions/actionCreators";
+import * as firebase from "firebase";
 
-const Payment = props => {
-  const { goToPayAction, goToCollectAction } = props;
-  return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Payment Screen</Text>
-      <Button title="Pay" onPress={() => goToPayAction()} />
-      <Button title="Collect" onPress={() => goToCollectAction()} />
-    </View>
-  );
-};
+import {
+  GoToCollect,
+  GoToPay,
+  SetWalletAmount
+} from "../redux/actions/actionCreators";
+
+class Payment extends Component {
+  constructor(props) {
+    super(props);
+    const { setWalletAmountAction } = this.props;
+
+    const userUid = firebase.auth().currentUser.uid;
+    firebase
+      .database()
+      .ref(`/users/${userUid}`)
+      .on("child_changed", childrenSnapshot => {
+        if (childrenSnapshot.val()) {
+          setWalletAmountAction(childrenSnapshot.val());
+        }
+      });
+  }
+
+  render() {
+    const { goToPayAction, goToCollectAction, walletAmount } = this.props;
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <Text>Payment Screen</Text>
+        <Text>{walletAmount}</Text>
+        <Button title="Pay" onPress={() => goToPayAction()} />
+        <Button title="Collect" onPress={() => goToCollectAction()} />
+      </View>
+    );
+  }
+}
 
 Payment.propTypes = {
+  walletAmount: PropTypes.number.isRequired,
   goToPayAction: PropTypes.func.isRequired,
-  goToCollectAction: PropTypes.func.isRequired
+  goToCollectAction: PropTypes.func.isRequired,
+  setWalletAmountAction: PropTypes.func.isRequired
 };
+
+const mapStateToProps = state => ({
+  walletAmount: state.paymentReducer.walletAmount
+});
 
 const mapDispatchToProps = dispatch => ({
   goToPayAction: () => dispatch(GoToPay()),
-  goToCollectAction: () => dispatch(GoToCollect())
+  goToCollectAction: () => dispatch(GoToCollect()),
+  setWalletAmountAction: amountReceived =>
+    dispatch(SetWalletAmount(amountReceived))
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Payment);

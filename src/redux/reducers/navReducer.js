@@ -8,7 +8,8 @@ import {
   LOGIN_SUCCESS,
   NAVIGATE_BACK,
   GO_TO_PAY,
-  GO_TO_COLLECT
+  GO_TO_COLLECT,
+  PAYMENT_SUCCESS
 } from "../actions/actionTypes";
 
 const initialNavState = AppNavigator.router.getStateForAction(
@@ -56,6 +57,8 @@ const navigationReducer = (state = initialNavState, action) => {
       return AppNavigator.router.getStateForAction(ActionForCollectScreen);
     case LOGOUT:
       return AppNavigator.router.getStateForAction(ResetAction);
+    case PAYMENT_SUCCESS:
+      return AppNavigator.router.getStateForAction(ActionForLoggedIn);
     default:
       return AppNavigator.router.getStateForAction(action, state) || state;
   }
