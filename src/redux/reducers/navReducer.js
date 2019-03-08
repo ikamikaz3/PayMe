@@ -9,7 +9,7 @@ import {
   NAVIGATE_BACK,
   GO_TO_PAY,
   GO_TO_COLLECT,
-  PAYMENT_SUCCESS
+  PAYMENT_SUCCESS, GO_TO_HISTORY, GO_TO_PROFILE, GO_TO_PAYMENT
 } from "../actions/actionTypes";
 
 const initialNavState = AppNavigator.router.getStateForAction(
@@ -34,6 +34,14 @@ const ActionForCollectScreen = AppNavigator.router.getActionForPathAndParams(
   `${screenNames.MAINSTACK}/${screenNames.WALLETSTACK}/${screenNames.COLLECT}`
 );
 
+const ActionForHistoryScreen = AppNavigator.router.getActionForPathAndParams(
+  `${screenNames.MAINSTACK}/${screenNames.HISTORY}`
+);
+
+const ActionForProfileScreen = AppNavigator.router.getActionForPathAndParams(
+  `${screenNames.MAINSTACK}/${screenNames.PROFILE}`
+);
+
 const ResetAction = StackActions.reset({
   index: 0,
   actions: [
@@ -55,6 +63,12 @@ const navigationReducer = (state = initialNavState, action) => {
       return AppNavigator.router.getStateForAction(ActionForPayScreen);
     case GO_TO_COLLECT:
       return AppNavigator.router.getStateForAction(ActionForCollectScreen);
+    case GO_TO_HISTORY:
+      return AppNavigator.router.getStateForAction(ActionForHistoryScreen);
+    case GO_TO_PROFILE:
+      return AppNavigator.router.getStateForAction(ActionForProfileScreen);
+    case GO_TO_PAYMENT:
+      return AppNavigator.router.getStateForAction(ActionForLoggedIn);
     case LOGOUT:
       return AppNavigator.router.getStateForAction(ResetAction);
     case PAYMENT_SUCCESS:
