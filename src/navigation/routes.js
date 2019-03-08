@@ -1,3 +1,7 @@
+import React from "react";
+import { Platform } from "react-native";
+import PropTypes from "prop-types";
+
 import {
   createStackNavigator,
   createBottomTabNavigator
@@ -17,6 +21,55 @@ import Collect from "../containers/Collect";
 import Home from "../screens/HomeScreen";
 import History from "../screens/HistoryScreen";
 import Profile from "../screens/ProfileScreen";
+import TabBarIcon from "../components/TabBarIcon";
+
+const HistoryStack = createStackNavigator({
+  [screenNames.HISTORY]: History
+});
+HistoryStack.navigationOptions = {
+  tabBarLabel: "History",
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === "ios" ? "ios-paper" : "md-paper"}
+    />
+  )
+};
+
+const ProfileStack = createStackNavigator({
+  [screenNames.PROFILE]: Profile
+});
+ProfileStack.navigationOptions = {
+  tabBarLabel: "Profile",
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === "ios" ? "ios-person" : "md-person"}
+    />
+  )
+};
+
+const WalletStack = {
+  // [screenNames.HOME]: Home
+  screen: createStackNavigator({
+    [screenNames.HOME]: { screen: Home },
+    [screenNames.PAY]: { screen: Pay },
+    [screenNames.COLLECT]: { screen: Collect }
+  })
+};
+WalletStack.navigationOptions = {
+  tabBarLabel: "Home",
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={
+        Platform.OS === "ios"
+          ? `ios-home${focused ? "" : "-outline"}`
+          : "md-home"
+      }
+    />
+  )
+};
 
 const AppNavigator = createStackNavigator(
   {
@@ -29,15 +82,10 @@ const AppNavigator = createStackNavigator(
     [screenNames.MAINSTACK]: {
       screen: createBottomTabNavigator(
         {
-          [screenNames.HISTORY]: { screen: History },
-          [screenNames.PROFILE]: { screen: Profile },
-          [screenNames.WALLETSTACK]: {
-            screen: createStackNavigator({
-              [screenNames.HOME]: { screen: Home },
-              [screenNames.PAY]: { screen: Pay },
-              [screenNames.COLLECT]: { screen: Collect }
-            })
-          }
+          // [screenNames.HISTORY]: { screen: History },
+          [screenNames.HISTORY]: HistoryStack,
+          [screenNames.PROFILE]: ProfileStack,
+          [screenNames.WALLETSTACK]: WalletStack
         },
         {
           order: [
@@ -53,5 +101,9 @@ const AppNavigator = createStackNavigator(
     navigationOptions: () => ({ header: null })
   }
 );
+
+WalletStack.propTypes = {
+  focused: PropTypes.bool.isRequired
+};
 
 export default AppNavigator;
