@@ -5,6 +5,7 @@ cache:
   paths:
     - ~/.yarn
     - .jest
+    - ./node_modules
 
 stages:
   - test
