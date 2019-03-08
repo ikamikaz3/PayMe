@@ -14,7 +14,9 @@ import {
   PAYMENT_PENDING,
   PAYMENT_ERROR,
   SET_WALLET_AMOUNT,
-  GO_TO_HISTORY, GO_TO_PROFILE, GO_TO_PAYMENT
+  GO_TO_HISTORY,
+  GO_TO_PROFILE,
+  GO_TO_PAYMENT
 } from "./actionTypes";
 
 function LoginPending(isLoginPending) {

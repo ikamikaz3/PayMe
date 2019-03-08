@@ -19,8 +19,7 @@ const uploadImage = async (uri, imageFileName) => {
     xhr.onload = () => {
       resolve(xhr.response);
     };
-    xhr.onerror = e => {
-      console.log(e);
+    xhr.onerror = () => {
       reject(new TypeError("Network request failed"));
     };
     xhr.responseType = "blob";
@@ -57,21 +56,27 @@ const onChooseImagePress = async () => {
             "Image uploaded !",
             [
               {
-                text: "Ask me later",
-                onPress: () => console.log("Ask me later pressed")
-              },
-              {
                 text: "Cancel",
-                onPress: () => console.log("Cancel Pressed"),
                 style: "cancel"
               },
-              { text: "OK", onPress: () => console.log("OK Pressed") }
+              { text: "OK" }
             ],
             { cancelable: false }
           );
         })
-        .catch(error => {
-          console.log(error);
+        .catch(() => {
+          Alert.alert(
+            "Error",
+            "Image uploaded failed!",
+            [
+              {
+                text: "Cancel",
+                style: "cancel"
+              },
+              { text: "OK" }
+            ],
+            { cancelable: false }
+          );
         });
     }
   }

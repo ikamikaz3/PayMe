@@ -8,6 +8,7 @@ cache:
 
 stages:
   - test
+  - lint
   - deploy
 
 jest-tests:
@@ -16,6 +17,11 @@ jest-tests:
   stage: test
   script:
     - yarn jest --ci
+
+eslint:
+  stage: lint
+  script:
+    - yarn lint
 
 expo-deploy:
   before_script:

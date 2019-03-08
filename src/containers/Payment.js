@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Text, View, Button, Dimensions } from "react-native";
+import { Text, View, Button } from "react-native";
 import * as firebase from "firebase";
 
 import {

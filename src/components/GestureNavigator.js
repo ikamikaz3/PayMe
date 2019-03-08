@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import {
   ViewPropTypes,
-  View,
   Animated,
   Dimensions,
   PanResponder
@@ -35,7 +34,6 @@ class GestureNavigator extends Component {
         }
       },
       onPanResponderRelease: (evt, gestureState) => {
-        console.log(gestureState.dx);
         if (gestureState.dx < -175) {
           Animated.timing(position, {
             toValue: { x: -300, y: 0 },
@@ -51,7 +49,6 @@ class GestureNavigator extends Component {
             actionForLeft();
           });
         } else {
-          console.log("RESET");
           Animated.timing(position, {
             toValue: { x: 0, y: 0 },
             duration: 300
@@ -63,7 +60,7 @@ class GestureNavigator extends Component {
 
   render() {
     const { position } = this.state;
-    const { children, styles } = this.props;
+    const { children } = this.props;
     return (
       <Animated.View
         style={[position.getLayout()]}

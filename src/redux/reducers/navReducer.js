@@ -9,7 +9,10 @@ import {
   NAVIGATE_BACK,
   GO_TO_PAY,
   GO_TO_COLLECT,
-  PAYMENT_SUCCESS, GO_TO_HISTORY, GO_TO_PROFILE, GO_TO_PAYMENT
+  PAYMENT_SUCCESS,
+  GO_TO_HISTORY,
+  GO_TO_PROFILE,
+  GO_TO_PAYMENT
 } from "../actions/actionTypes";
 
 const initialNavState = AppNavigator.router.getStateForAction(

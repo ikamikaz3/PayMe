@@ -1,30 +1,24 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Dimensions, Text, View } from "react-native";
+import { Text, View } from "react-native";
 
 import { GoToPayment, GoToProfile } from "../redux/actions/actionCreators";
 import GestureNavigator from "../components/GestureNavigator";
 
-class History extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    const { goToPaymentAction, goToProfileAction } = this.props;
-    return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <GestureNavigator
-          actionForLeft={() => goToProfileAction()}
-          actionForRight={() => goToPaymentAction()}
-        >
-          <Text>History Screen</Text>
-        </GestureNavigator>
-      </View>
-    );
-  }
-}
+const History = props => {
+  const { goToPaymentAction, goToProfileAction } = props;
+  return (
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <GestureNavigator
+        actionForLeft={() => goToProfileAction()}
+        actionForRight={() => goToPaymentAction()}
+      >
+        <Text>History Screen</Text>
+      </GestureNavigator>
+    </View>
+  );
+};
 
 History.propTypes = {
   goToPaymentAction: PropTypes.func.isRequired,
