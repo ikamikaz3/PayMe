@@ -7145,6 +7145,13 @@ react-native-branch@2.2.5:
   resolved "https://registry.yarnpkg.com/react-native-branch/-/react-native-branch-2.2.5.tgz#4074dd63b4973e6397d9ce50e97b57c77a518e9d"
   integrity sha1-QHTdY7SXPmOX2c5Q6XtXx3pRjp0=
 
+react-native-camera@^1.13.0:
+  version "1.13.0"
+  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-1.13.0.tgz#cd1744ee3f97c18937c5bb3cd7b7ddc8e6a5bba0"
+  integrity sha512-Oe9QFTiGvUaKLPHv9VO04YSFVSNwR348kOjGOL48IpnH9bIo0NH7rKTqyMrkZtlN1aVO51Kg7axrZH60HcZIFQ==
+  dependencies:
+    prop-types "^15.6.2"
+
 react-native-dismiss-keyboard@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-native-dismiss-keyboard/-/react-native-dismiss-keyboard-1.0.0.tgz#32886242b3f2317e121f3aeb9b0a585e2b879b49"
@@ -7172,6 +7179,11 @@ react-native-gesture-handler@~1.0.14:
     hoist-non-react-statics "^2.3.1"
     invariant "^2.2.2"
     prop-types "^15.5.10"
+
+react-native-image-picker@^0.28.0:
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-0.28.0.tgz#e3f26df170ea932e9c0404624fbced2f59a300e3"
+  integrity sha512-lQfdOyC1mQ/pvfEaUGdoodO1A1clg9kf6YC1WdbWhA6XK+joBd9GQYf8SaCf6/7vM25U4ib+6ux4yvnrS1pOqQ==
 
 "react-native-maps@github:expo/react-native-maps#v0.22.1-exp.0":
   version "0.22.1"
