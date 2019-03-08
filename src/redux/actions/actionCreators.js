@@ -9,7 +9,11 @@ import {
   REGISTER_ERROR,
   NAVIGATE_BACK,
   GO_TO_PAY,
-  GO_TO_COLLECT
+  GO_TO_COLLECT,
+  PAYMENT_SUCCESS,
+  PAYMENT_PENDING,
+  PAYMENT_ERROR,
+  SET_WALLET_AMOUNT
 } from "./actionTypes";
 
 function LoginPending(isLoginPending) {
@@ -84,6 +88,34 @@ function GoToCollect() {
   };
 }
 
+function PaymentSuccess(isPaymentSuccessful) {
+  return {
+    type: PAYMENT_SUCCESS,
+    isPaymentSuccessful
+  };
+}
+
+function PaymentPending(isPaymentPending) {
+  return {
+    type: PAYMENT_PENDING,
+    isPaymentPending
+  };
+}
+
+function PaymentError(paymentErrorMessage) {
+  return {
+    type: PAYMENT_ERROR,
+    paymentErrorMessage
+  };
+}
+
+function SetWalletAmount(walletAmount) {
+  return {
+    type: SET_WALLET_AMOUNT,
+    walletAmount
+  };
+}
+
 export {
   LoginPending,
   LoginSuccess,
@@ -95,5 +127,9 @@ export {
   RegisterError,
   NavigateBack,
   GoToCollect,
-  GoToPay
+  GoToPay,
+  PaymentPending,
+  PaymentSuccess,
+  PaymentError,
+  SetWalletAmount
 };

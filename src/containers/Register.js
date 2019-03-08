@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Text, View, TextInput, Button } from "react-native";
-import { register } from "../redux/reducers/authReducer";
+import { register } from "../api/firebaseAuthentication";
 import { NavigateBack } from "../redux/actions/actionCreators";
 
 class RegisterComponent extends Component {
