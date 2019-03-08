@@ -10,12 +10,9 @@ stages:
   - lint
   - deploy
 
-before_script:
-  - yarn install --frozen-lockfile
-  - yarn add --dev expo-cli
-  - sysctl -w fs.inotify.max_user_watches=524288
-
 jest-tests:
+  before_script:
+    - yarn install --frozen-lockfile
   stage: test
   script:
     - yarn jest --ci
@@ -26,6 +23,8 @@ eslint:
     - yarn lint
 
 expo-deploy:
+  before_script:
+    - sysctl -w fs.inotify.max_user_watches=524288
   stage: deploy
   only:
     refs:
