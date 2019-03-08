@@ -1,40 +1,42 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Dimensions, Text, View } from "react-native";
 
-import SwipeableList from "../components/SwipeableList";
+import { GoToPayment, GoToProfile } from "../redux/actions/actionCreators";
+import GestureNavigator from "../components/GestureNavigator";
 
-const listData = [
-  { key: "1. element" },
-  { key: "2. element" },
-  { key: "3. element" },
-  { key: "4. element" },
-  { key: "5. element" },
-  { key: "6. element" },
-  { key: "7. element" },
-  { key: "8. element" },
-  { key: "9. element" },
-  { key: "10. element" },
-  { key: "11. element" },
-  { key: "12. element" },
-  { key: "13. element" }
-];
-
-const styles = StyleSheet.create({
-  separatorViewStyle: {
-    flex: 1,
-    backgroundColor: "#FFF"
-  },
-  separatorStyle: {
-    height: 1,
-    backgroundColor: "#000"
+class History extends Component {
+  constructor(props) {
+    super(props);
   }
+
+  render() {
+    const { goToPaymentAction, goToProfileAction } = this.props;
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <GestureNavigator
+          actionForLeft={() => goToProfileAction()}
+          actionForRight={() => goToPaymentAction()}
+        >
+          <Text>History Screen</Text>
+        </GestureNavigator>
+      </View>
+    );
+  }
+}
+
+History.propTypes = {
+  goToPaymentAction: PropTypes.func.isRequired,
+  goToProfileAction: PropTypes.func.isRequired
+};
+
+const mapDispatchToProps = dispatch => ({
+  goToPaymentAction: () => dispatch(GoToPayment()),
+  goToProfileAction: () => dispatch(GoToProfile())
 });
 
-const History = () => (
-  <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-    <Text>History Screen</Text>
-    <SwipeableList data={listData} styles={styles} />
-  </View>
-);
-
-export default History;
+export default connect(
+  null,
+  mapDispatchToProps
+)(History);

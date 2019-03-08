@@ -13,7 +13,8 @@ import {
   PAYMENT_SUCCESS,
   PAYMENT_PENDING,
   PAYMENT_ERROR,
-  SET_WALLET_AMOUNT
+  SET_WALLET_AMOUNT,
+  GO_TO_HISTORY, GO_TO_PROFILE, GO_TO_PAYMENT
 } from "./actionTypes";
 
 function LoginPending(isLoginPending) {
@@ -88,6 +89,24 @@ function GoToCollect() {
   };
 }
 
+function GoToHistory() {
+  return {
+    type: GO_TO_HISTORY
+  };
+}
+
+function GoToProfile() {
+  return {
+    type: GO_TO_PROFILE
+  };
+}
+
+function GoToPayment() {
+  return {
+    type: GO_TO_PAYMENT
+  };
+}
+
 function PaymentSuccess(isPaymentSuccessful) {
   return {
     type: PAYMENT_SUCCESS,
@@ -128,6 +147,9 @@ export {
   NavigateBack,
   GoToCollect,
   GoToPay,
+  GoToHistory,
+  GoToProfile,
+  GoToPayment,
   PaymentPending,
   PaymentSuccess,
   PaymentError,
