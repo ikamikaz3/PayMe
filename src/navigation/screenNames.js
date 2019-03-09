@@ -3,6 +3,7 @@ const LOGIN = "LOGIN";
 const HISTORY = "HISTORY";
 const PAYMENT = "PAYMENT";
 const PROFILE = "PROFILE";
+const HOME = "HOME";
 
 const PAY = "PAY";
 const COLLECT = "COLLECT";
@@ -15,6 +16,7 @@ const WALLETSTACK = "WALLET";
 export {
   REGISTER,
   LOGIN,
+  HOME,
   HISTORY,
   PAYMENT,
   PROFILE,

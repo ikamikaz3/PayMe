@@ -9,6 +9,7 @@
     "test": "./node_modules/.bin/jest"
   },
   "dependencies": {
+    "@expo/vector-icons": "^9.0.0",
     "babel-eslint": "^10.0.1",
     "eslint-plugin-jest": "^22.3.0",
     "expo": "^32.0.0",

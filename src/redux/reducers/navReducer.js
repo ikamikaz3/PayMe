@@ -12,7 +12,7 @@ import {
   PAYMENT_SUCCESS,
   GO_TO_HISTORY,
   GO_TO_PROFILE,
-  GO_TO_PAYMENT
+  GO_TO_HOME
 } from "../actions/actionTypes";
 
 const initialNavState = AppNavigator.router.getStateForAction(
@@ -22,7 +22,7 @@ const initialNavState = AppNavigator.router.getStateForAction(
 );
 
 const ActionForLoggedIn = AppNavigator.router.getActionForPathAndParams(
-  `${screenNames.MAINSTACK}/${screenNames.WALLETSTACK}`
+  `${screenNames.MAINSTACK}/${screenNames.WALLETSTACK}` // Brancher le screen principal
 );
 
 const ActionForRegisterScreen = AppNavigator.router.getActionForPathAndParams(
@@ -70,7 +70,7 @@ const navigationReducer = (state = initialNavState, action) => {
       return AppNavigator.router.getStateForAction(ActionForHistoryScreen);
     case GO_TO_PROFILE:
       return AppNavigator.router.getStateForAction(ActionForProfileScreen);
-    case GO_TO_PAYMENT:
+    case GO_TO_HOME:
       return AppNavigator.router.getStateForAction(ActionForLoggedIn);
     case LOGOUT:
       return AppNavigator.router.getStateForAction(ResetAction);

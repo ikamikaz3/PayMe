@@ -16,7 +16,7 @@ import {
   SET_WALLET_AMOUNT,
   GO_TO_HISTORY,
   GO_TO_PROFILE,
-  GO_TO_PAYMENT
+  GO_TO_HOME
 } from "./actionTypes";
 
 function LoginPending(isLoginPending) {
@@ -103,9 +103,9 @@ function GoToProfile() {
   };
 }
 
-function GoToPayment() {
+function GoToHome() {
   return {
-    type: GO_TO_PAYMENT
+    type: GO_TO_HOME
   };
 }
 
@@ -151,7 +151,7 @@ export {
   GoToPay,
   GoToHistory,
   GoToProfile,
-  GoToPayment,
+  GoToHome,
   PaymentPending,
   PaymentSuccess,
   PaymentError,
