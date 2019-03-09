@@ -1,43 +1,38 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import {
-  Text,
   View,
   TextInput,
   StyleSheet,
   TouchableOpacity,
-  Image
+  Image,
+  StatusBar,
+  KeyboardAvoidingView
 } from "react-native";
 import { connect } from "react-redux";
 import { login } from "../api/firebaseAuthentication";
 import { goToRegister } from "../redux/actions/actionCreators";
 
-const resizeMode = "center";
+import AppText from "../components/AppText";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    flexDirection: "column",
     alignItems: "center",
-    backgroundColor: "#00BFFF"
+    backgroundColor: "rgba(0, 191, 255, 0.5)",
+    justifyContent: "space-evenly"
   },
-  header: {
-    backgroundColor: "#00BFFF"
+  background: {
+    flex: 0.85
   },
-
   avatar: {
     width: 130,
     height: 130,
     borderRadius: 63,
     borderWidth: 4,
-    borderColor: "white",
-    marginBottom: 10,
-    bottom: 550,
-    alignSelf: "center",
-    position: "absolute",
-    marginTop: 130
+    borderColor: "white"
   },
-
   inputContainer: {
     borderBottomColor: "#F5FCFF",
     backgroundColor: "#FFFFFF",
@@ -47,7 +42,6 @@ const styles = StyleSheet.create({
     height: 45,
     marginBottom: 20,
     alignItems: "center",
-
     shadowColor: "#808080",
     shadowOffset: {
       width: 0,
@@ -55,28 +49,8 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-
     elevation: 5
   },
-  inputs: {
-    height: 45,
-    marginLeft: 16,
-    borderBottomColor: "#FFFFFF",
-    flex: 1
-  },
-
-  inputIcon: {
-    width: 30,
-    height: 30,
-    marginRight: 15,
-    flexDirection: "row",
-    justifyContent: "flex-end"
-  },
-
-  digiTitre: {
-    bottom: 50
-  },
-
   notRegisterStyle: {
     backgroundColor: "#db0867",
     shadowColor: "#808080",
@@ -99,15 +73,6 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     backgroundColor: "transparent"
   },
-  btnForgotPassword: {
-    height: 15,
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    alignItems: "flex-end",
-    marginBottom: 10,
-    width: 300,
-    backgroundColor: "transparent"
-  },
   loginButton: {
     backgroundColor: "#00ec56",
     shadowColor: "#808080",
@@ -117,23 +82,13 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.5,
     shadowRadius: 12.35,
-
     elevation: 19
   },
-  loginText: {
-    color: "white"
+  title: {
+    fontSize: 50
   },
-  bgImage: {
-    flex: 1,
-    resizeMode,
-    position: "absolute",
-    width: "100%",
-    height: "100%",
-    justifyContent: "center"
-  },
-  btnText: {
-    color: "white",
-    fontWeight: "bold"
+  text: {
+    fontSize: 18
   }
 });
 
@@ -149,15 +104,10 @@ class LoginScreen extends Component {
   render() {
     const { email, password } = this.state;
     const { loginErrorMessage, loginAction, goToRegisterAction } = this.props;
+
     return (
-      <View
-        style={{
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "#00BFFF"
-        }}
-      >
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
+        <StatusBar hidden />
         <Image
           style={styles.avatar}
           source={{
@@ -165,43 +115,50 @@ class LoginScreen extends Component {
               "https://img.freepik.com/free-vector/hand-holding-smartphone-scan-qr-code-pay_32996-137.jpg?size=338&ext=jpg"
           }}
         />
+        <AppText style={{ fontSize: 50 }}>My DigiPay</AppText>
+        <View style={styles.background}>
+          <View style={styles.inputContainer}>
+            <TextInput
+              keyboardType="email-address"
+              underlineColorAndroid="transparent"
+              style={styles.text}
+              value={email}
+              onChangeText={text => this.setState({ email: text })}
+            />
+          </View>
 
-        <Text style={styles.digiTitre}>My digi Pay </Text>
+          <View style={styles.inputContainer}>
+            <TextInput
+              value={password}
+              style={styles.text}
+              onChangeText={text => this.setState({ password: text })}
+            />
+          </View>
 
-        <View style={styles.inputContainer}>
-          <TextInput
-            keyboardType="email-address"
-            underlineColorAndroid="transparent"
-            value={email}
-            onChangeText={text => this.setState({ email: text })}
-          />
+          <TouchableOpacity
+            style={[styles.buttonContainer, styles.loginButton]}
+            title="Login"
+            onPress={() => loginAction(email, password)}
+          >
+            <AppText style={styles.text}>Login</AppText>
+
+            {loginErrorMessage !== null && (
+              <AppText style={styles.text}>{loginErrorMessage}</AppText>
+            )}
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            // style={[styles.buttonContainer, styles.notRegisterStyle]}
+            style={[styles.buttonContainer, styles.text]}
+            title="Not registered yet?"
+            onPress={() => goToRegisterAction()}
+          >
+            <AppText style={{ fontSize: 18, textDecorationLine: "underline" }}>
+              Not registered yet !
+            </AppText>
+          </TouchableOpacity>
         </View>
-
-        <View style={styles.inputContainer}>
-          <TextInput
-            value={password}
-            onChangeText={text => this.setState({ password: text })}
-          />
-        </View>
-
-        <TouchableOpacity
-          style={[styles.buttonContainer, styles.loginButton]}
-          title="Login"
-          onPress={() => loginAction(email, password)}
-        >
-          <Text>Login</Text>
-
-          {loginErrorMessage !== null && <Text>{loginErrorMessage}</Text>}
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[styles.buttonContainer, styles.notRegisterStyle]}
-          title="Not registered yet?"
-          onPress={() => goToRegisterAction()}
-        >
-          <Text>Not registered yet !</Text>
-        </TouchableOpacity>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }

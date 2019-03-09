@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     flex: 0.6,
     alignItems: "center",
     justifyContent: "space-around",
-    marginBottom: 25,
+    marginBottom: 20,
     borderWidth: 0.5,
     borderRadius: 10,
     backgroundColor: "#fff"
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: "MyDigiPay",
+    title: "My DigiPay",
     headerTitleStyle: {
       flex: 1,
       textAlign: "center"

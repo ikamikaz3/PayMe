@@ -8,10 +8,14 @@ const recv = require("../../assets/images/receiveMoney.png");
 
 const styles = StyleSheet.create({
   buttons: {
-    width: 125,
-    height: 125,
-    justifyContent: "space-evenly",
-    alignItems: "center"
+    width: 133,
+    height: 133,
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 0.5,
+    borderRadius: 10,
+    backgroundColor: "rgba(0, 191, 255, 0.33)"
+    // backgroundColor: "#fff"
   },
   money: {
     width: 75,

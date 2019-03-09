@@ -2,130 +2,36 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {
-  Text,
   View,
   TextInput,
   StyleSheet,
   TouchableOpacity,
-  Image
+  Image,
+  StatusBar,
+  KeyboardAvoidingView
 } from "react-native";
 import { register } from "../api/firebaseAuthentication";
 
-const resizeMode = "center";
-
-class RegisterScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: "user@example.com",
-      password: "password",
-      confirmPassword: "enter password (again)"
-    };
-  }
-
-  render() {
-    const { styles, registerErrorMessage, registerAction } = this.props;
-    const { email, password, confirmPassword } = this.state;
-    return (
-      <View
-        style={{
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "#00BFFF"
-        }}
-      >
-        <Image
-          style={styles.avatar}
-          source={{
-            uri:
-              "https://img.freepik.com/free-vector/hand-holding-smartphone-scan-qr-code-pay_32996-137.jpg?size=338&ext=jpg"
-          }}
-        />
-
-        <Text style={styles.digiTitre}>My digi Pay </Text>
-
-        <View style={styles.inputContainer}>
-          <Image
-            style={styles.inputIcon}
-            source={{
-              uri: "https://png.icons8.com/message/ultraviolet/50/3498db"
-            }}
-          />
-
-          <TextInput
-            keyboardType="email-address"
-            underlineColorAndroid="transparent"
-            value={email}
-            onChangeText={text => this.setState({ email: text })}
-          />
-        </View>
-
-        <View style={styles.inputContainer}>
-          <Image
-            style={styles.inputIcon}
-            source={{
-              uri: "https://png.icons8.com/key-2/ultraviolet/50/3498db"
-            }}
-          />
-
-          <TextInput
-            value={password}
-            onChangeText={text => this.setState({ password: text })}
-          />
-        </View>
-
-        <View style={styles.inputContainer}>
-          <Image
-            style={styles.inputIcon}
-            source={{
-              uri: "https://png.icons8.com/key-2/ultraviolet/50/3498db"
-            }}
-          />
-
-          <TextInput
-            value={confirmPassword}
-            onChangeText={text => this.setState({ confirmPassword: text })}
-          />
-        </View>
-
-        <TouchableOpacity
-          style={[styles.buttonContainer, styles.loginButton]}
-          title="Register"
-          onPress={() => registerAction(email, password)}
-        >
-          <Text>Confirm</Text>
-          {registerErrorMessage !== null && <Text>{registerErrorMessage}</Text>}
-        </TouchableOpacity>
-      </View>
-    );
-  }
-}
+import AppText from "../components/AppText";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    flexDirection: "column",
     alignItems: "center",
-    backgroundColor: "#00BFFF"
+    backgroundColor: "rgba(0, 191, 255, 0.5)",
+    justifyContent: "space-evenly"
   },
-  header: {
-    backgroundColor: "#00BFFF"
+  background: {
+    flex: 0.85
   },
-
   avatar: {
     width: 130,
     height: 130,
     borderRadius: 63,
     borderWidth: 4,
-    borderColor: "white",
-    marginBottom: 10,
-    bottom: 550,
-    alignSelf: "center",
-    position: "absolute",
-    marginTop: 130
+    borderColor: "white"
   },
-
   inputContainer: {
     borderBottomColor: "#F5FCFF",
     backgroundColor: "#FFFFFF",
@@ -135,7 +41,6 @@ const styles = StyleSheet.create({
     height: 45,
     marginBottom: 20,
     alignItems: "center",
-
     shadowColor: "#808080",
     shadowOffset: {
       width: 0,
@@ -143,28 +48,8 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-
     elevation: 5
   },
-  inputs: {
-    height: 45,
-    marginLeft: 16,
-    borderBottomColor: "#FFFFFF",
-    flex: 1
-  },
-
-  inputIcon: {
-    width: 30,
-    height: 30,
-    marginRight: 2
-
-    // justifyContent: 'center'
-  },
-
-  digiTitre: {
-    bottom: 50
-  },
-
   notRegisterStyle: {
     backgroundColor: "#db0867",
     shadowColor: "#808080",
@@ -177,6 +62,11 @@ const styles = StyleSheet.create({
 
     elevation: 19
   },
+  // inputIcon: {
+  //   width: 30,
+  //   height: 30,
+  //   marginRight: 2
+  // },
   buttonContainer: {
     height: 45,
     flexDirection: "row",
@@ -187,17 +77,8 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     backgroundColor: "transparent"
   },
-  btnForgotPassword: {
-    height: 15,
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    alignItems: "flex-end",
-    marginBottom: 10,
-    width: 300,
-    backgroundColor: "transparent"
-  },
-  loginButton: {
-    backgroundColor: "#ec00dc",
+  registerButton: {
+    backgroundColor: "#00ec56",
     shadowColor: "#808080",
     shadowOffset: {
       width: 0,
@@ -205,35 +86,115 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.5,
     shadowRadius: 12.35,
-
     elevation: 19
   },
-  loginText: {
-    color: "white"
+  title: {
+    fontSize: 50
   },
-  bgImage: {
-    flex: 1,
-    resizeMode,
-    position: "absolute",
-    width: "100%",
-    height: "100%",
-    justifyContent: "center"
-  },
-  btnText: {
-    color: "white",
-    fontWeight: "bold"
+  text: {
+    fontSize: 18
   }
 });
 
+class RegisterScreen extends Component {
+  static navigationOptions = {
+    header: null
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "user@example.com",
+      password: "password",
+      confirmPassword: "enter password (again)"
+    };
+  }
+
+  render() {
+    const { registerErrorMessage, registerAction } = this.props;
+    const { email, password, confirmPassword } = this.state;
+    return (
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
+        <StatusBar hidden />
+        <Image
+          style={styles.avatar}
+          source={{
+            uri:
+              "https://img.freepik.com/free-vector/hand-holding-smartphone-scan-qr-code-pay_32996-137.jpg?size=338&ext=jpg"
+          }}
+        />
+        <AppText style={{ fontSize: 50 }}>My DigiPay</AppText>
+        <View style={styles.background}>
+          <View style={styles.inputContainer}>
+            {/* <Image
+              style={styles.inputIcon}
+              source={{
+                uri: "https://png.icons8.com/message/ultraviolet/50/3498db"
+              }}
+            /> */}
+
+            <TextInput
+              keyboardType="email-address"
+              underlineColorAndroid="transparent"
+              value={email}
+              style={styles.text}
+              onChangeText={text => this.setState({ email: text })}
+            />
+          </View>
+
+          <View style={styles.inputContainer}>
+            {/* <Image
+              style={styles.inputIcon}
+              source={{
+                uri: "https://png.icons8.com/key-2/ultraviolet/50/3498db"
+              }}
+            /> */}
+
+            <TextInput
+              value={password}
+              style={styles.text}
+              onChangeText={text => this.setState({ password: text })}
+            />
+          </View>
+
+          <View style={styles.inputContainer}>
+            {/* <Image
+              style={styles.inputIcon}
+              source={{
+                uri: "https://png.icons8.com/key-2/ultraviolet/50/3498db"
+              }}
+            /> */}
+
+            <TextInput
+              value={confirmPassword}
+              style={styles.text}
+              onChangeText={text => this.setState({ confirmPassword: text })}
+            />
+          </View>
+
+          <TouchableOpacity
+            style={[styles.buttonContainer, styles.registerButton]}
+            title="Register"
+            onPress={() => registerAction(email, password)}
+          >
+            <AppText style={styles.text}>Register</AppText>
+            {registerErrorMessage !== null && (
+              <AppText style={styles.text}>{registerErrorMessage}</AppText>
+            )}
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
+    );
+  }
+}
+
 RegisterScreen.propTypes = {
   registerErrorMessage: PropTypes.string,
-  registerAction: PropTypes.func.isRequired,
-  styles
+  registerAction: PropTypes.func.isRequired
 };
 
 RegisterScreen.defaultProps = {
-  registerErrorMessage: null,
-  styles
+  registerErrorMessage: null
 };
 
 const mapStateToProps = state => ({

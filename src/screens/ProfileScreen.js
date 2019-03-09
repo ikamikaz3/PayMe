@@ -12,13 +12,12 @@ import {
 import { connect } from "react-redux";
 
 import { GoToHistory, GoToHome } from "../redux/actions/actionCreators";
-
-// const Fonts = { vintage: "regular" };
+import AppText from "../components/AppText";
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: "#00BFFF",
-    height: 200
+    backgroundColor: "rgba(0, 191, 255, 0.5)",
+    height: 150
   },
   avatar: {
     width: 130,
@@ -48,31 +47,15 @@ const styles = StyleSheet.create({
   digiTitre: {
     alignSelf: "center",
     fontSize: 40.7,
-    top: 60
-  },
-  name: {
-    fontSize: 22,
-    color: "#FFFFFF",
-    fontWeight: "600"
+    top: 15
   },
   body: {
     marginTop: 40
   },
   bodyContent: {
-    flex: 1,
+    flex: 3,
     alignItems: "center",
     padding: 30
-  },
-  info: {
-    fontSize: 16,
-    color: "#00BFFF",
-    marginTop: 10
-  },
-  description: {
-    fontSize: 16,
-    color: "#696969",
-    marginTop: 10,
-    textAlign: "center"
   },
   buttonContainer: {
     marginTop: 10,
@@ -83,12 +66,14 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     width: 250,
     borderRadius: 30,
-    backgroundColor: "#00BFFF"
+    backgroundColor: "rgba(0, 191, 255, 0.5)"
+  },
+  profileFont: {
+    fontSize: 20
   }
 });
 
 class ProfileScreen extends Component {
-  // Doesn't work
   static navigationOptions = {
     title: "Profile",
     headerTitleStyle: {
@@ -153,7 +138,7 @@ class ProfileScreen extends Component {
         {...this.panResponder.panHandlers}
       >
         <View style={styles.header}>
-          <Text style={styles.digiTitre}>My digi Pay </Text>
+          <AppText style={styles.digiTitre}>My Digi Pay </AppText>
         </View>
         <Image
           style={styles.avatar}
@@ -161,24 +146,17 @@ class ProfileScreen extends Component {
         />
         <View style={styles.body}>
           <View style={styles.bodyContent}>
-            <Text style={styles.name}>John Doe rgrr</Text>
-            <Text style={styles.info}>UX Designer / Mobile developer</Text>
-            <Text style={styles.description}>
-              Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum
-              electram expetendis, omittam deseruisse consequuntur ius an,
-            </Text>
-
             <TouchableOpacity style={styles.buttonContainer}>
-              <Text>Prenom</Text>
+              <AppText style={styles.profileFont}>Prenom</AppText>
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttonContainer}>
-              <Text>Nom</Text>
+              <AppText style={styles.profileFont}>Nom</AppText>
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttonContainer}>
-              <Text>mail</Text>
+              <AppText style={styles.profileFont}>Mail</AppText>
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttonContainer}>
-              <Text>Tel</Text>
+              <AppText style={styles.profileFont}>Tel</AppText>
             </TouchableOpacity>
           </View>
         </View>

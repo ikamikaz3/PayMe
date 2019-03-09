@@ -9,9 +9,9 @@ import { GoToProfile, GoToHome } from "../redux/actions/actionCreators";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 20,
-    marginLeft: 20,
-    marginRight: 20,
+    paddingTop: 15,
+    paddingLeft: 15,
+    paddingRight: 15,
     backgroundColor: "#fff"
   }
 });

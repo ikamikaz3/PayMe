@@ -27,7 +27,7 @@ class App extends React.Component {
   // }
 
   loadResourcesAsync = async () => {
-    Promise.all([
+    await Promise.all([
       Font.loadAsync({
         ...Icon.Ionicons.font,
         openSansSemiBold: fontPath
