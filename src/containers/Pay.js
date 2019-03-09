@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Text, View, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { BarCodeScanner, Permissions } from "expo";
 import { connect } from "react-redux";
+
+import AppText from "../components/AppText";
 
 import { createPayment, getUser } from "../api/firebaseDatabase";
 import {
@@ -11,7 +13,31 @@ import {
   PaymentSuccess
 } from "../redux/actions/actionCreators";
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: "25%",
+    paddingBottom: "15%",
+    paddingLeft: "5%",
+    paddingRight: "5%",
+    backgroundColor: "rgba(0, 191, 255, 0.5)"
+  },
+  text: {
+    fontSize: 20,
+    justifyContent: "center"
+  }
+});
+
 class Pay extends Component {
+  static navigationOptions = {
+    title: "Scan a DigiPay QR Code to pay",
+    headerTitleStyle: {
+      flex: 1,
+      paddingRight: 20,
+      textAlign: "center"
+    }
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -55,16 +81,18 @@ class Pay extends Component {
     const { hasCameraPermission } = this.state;
 
     if (hasCameraPermission === null) {
-      return <Text>Requesting for camera permission</Text>;
+      return (
+        <AppText style={styles.text}>Requesting for camera permission</AppText>
+      );
     }
     if (hasCameraPermission === false) {
-      return <Text>No access to camera</Text>;
+      return <AppText style={styles.text}>No access to camera</AppText>;
     }
     return (
-      <View style={{ flex: 1 }}>
+      <View style={styles.container}>
         <BarCodeScanner
           onBarCodeScanned={this.handleBarCodeRead}
-          style={StyleSheet.absoluteFill}
+          style={{ flex: 1 }}
         />
       </View>
     );

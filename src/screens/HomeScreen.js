@@ -127,7 +127,7 @@ class HomeScreen extends React.Component {
         <View style={styles.container}>
           <View style={styles.balance}>
             <AppText>Current Balance</AppText>
-            <AppText>{walletAmount}</AppText>
+            <AppText>{walletAmount} €</AppText>
           </View>
           <View style={styles.buttonsLayout}>
             <MoneyButton type="pay" actionToTrigger={() => goToPayAction()} />

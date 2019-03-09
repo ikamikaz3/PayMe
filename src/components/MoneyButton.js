@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderWidth: 0.5,
     borderRadius: 10,
-    backgroundColor: "rgba(0, 191, 255, 0.33)"
+    backgroundColor: "rgba(0, 191, 255, 0.5)"
     // backgroundColor: "#fff"
   },
   money: {
