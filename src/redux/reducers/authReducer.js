@@ -5,7 +5,8 @@ import {
   LOGOUT,
   REGISTER_ERROR,
   REGISTER_PENDING,
-  REGISTER_SUCCESS
+  REGISTER_SUCCESS,
+  SET_PROFILE_PICTURE_URI
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -57,6 +58,11 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         registerErrorMessage: action.registerErrorMessage
+      };
+    case SET_PROFILE_PICTURE_URI:
+      return {
+        ...state,
+        uri: action.uri
       };
     default:
       return state;

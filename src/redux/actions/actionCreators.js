@@ -16,7 +16,8 @@ import {
   SET_WALLET_AMOUNT,
   GO_TO_HISTORY,
   GO_TO_PROFILE,
-  GO_TO_HOME
+  GO_TO_HOME,
+  SET_PROFILE_PICTURE_URI
 } from "./actionTypes";
 
 function LoginPending(isLoginPending) {
@@ -137,6 +138,13 @@ function SetWalletAmount(walletAmount) {
   };
 }
 
+function SetProfilePictureURI(uri) {
+  return {
+    type: SET_PROFILE_PICTURE_URI,
+    uri
+  };
+}
+
 export {
   LoginPending,
   LoginSuccess,
@@ -155,5 +163,6 @@ export {
   PaymentPending,
   PaymentSuccess,
   PaymentError,
-  SetWalletAmount
+  SetWalletAmount,
+  SetProfilePictureURI
 };

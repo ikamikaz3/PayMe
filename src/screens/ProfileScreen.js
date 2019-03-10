@@ -6,12 +6,20 @@ import {
   Image,
   TouchableOpacity,
   Animated,
-  PanResponder
+  PanResponder,
+  Alert,
+  TouchableHighlight
 } from "react-native";
 import { connect } from "react-redux";
+import { Permissions, ImagePicker } from "expo";
 
-import { GoToHistory, GoToHome } from "../redux/actions/actionCreators";
+import {
+  GoToHistory,
+  GoToHome,
+  SetProfilePictureURI
+} from "../redux/actions/actionCreators";
 import AppText from "../components/AppText";
+import { UploadImage } from "../api/firebaseDatabase";
 
 const styles = StyleSheet.create({
   header: {
@@ -42,7 +50,6 @@ const styles = StyleSheet.create({
     marginTop: 130,
     bottom: 40
   },
-
   digiTitre: {
     alignSelf: "center",
     fontSize: 40.7,
@@ -72,6 +79,53 @@ const styles = StyleSheet.create({
   }
 });
 
+const onChooseImagePress = async setProfilePictureURI => {
+  const cameraPermission = await Permissions.askAsync(Permissions.CAMERA);
+  const cameraRollPermission = await Permissions.askAsync(
+    Permissions.CAMERA_ROLL
+  );
+
+  const result = await ImagePicker.launchCameraAsync();
+
+  if (
+    cameraPermission.status === "granted" &&
+    cameraRollPermission.status === "granted"
+  ) {
+    if (!result.cancelled) {
+      UploadImage(result.uri, "profile_pic.png")
+        .then(uri => {
+          setProfilePictureURI(uri);
+          Alert.alert(
+            "Success",
+            "Image uploaded !",
+            [
+              {
+                text: "Cancel",
+                style: "cancel"
+              },
+              { text: "OK" }
+            ],
+            { cancelable: false }
+          );
+        })
+        .catch(() => {
+          Alert.alert(
+            "Error",
+            "Image uploaded failed!",
+            [
+              {
+                text: "Cancel",
+                style: "cancel"
+              },
+              { text: "OK" }
+            ],
+            { cancelable: false }
+          );
+        });
+    }
+  }
+};
+
 class ProfileScreen extends Component {
   static navigationOptions = {
     title: "Profile",
@@ -84,13 +138,11 @@ class ProfileScreen extends Component {
   constructor(props) {
     super(props);
 
-    this.gestureDelay = -35;
-
-    const position = new Animated.ValueXY();
-    this.state = { position };
-
     const { goToHomeAction, goToHistoryAction } = this.props;
+    const position = new Animated.ValueXY();
 
+    this.gestureDelay = -35;
+    this.state = { position };
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponder: () => false,
       onMoveShouldSetPanResponder: () => true,
@@ -131,6 +183,7 @@ class ProfileScreen extends Component {
 
   render() {
     const { position } = this.state;
+    const { uri, setProfilePictureURIAction } = this.props;
     return (
       <Animated.View
         style={[position.getLayout(), styles.container]}
@@ -139,10 +192,13 @@ class ProfileScreen extends Component {
         <View style={styles.header}>
           <AppText style={styles.digiTitre}>My Digi Pay </AppText>
         </View>
-        <Image
-          style={styles.avatar}
-          source={{ uri: "https://bootdey.com/img/Content/avatar/avatar6.png" }}
-        />
+        <TouchableHighlight
+          onPress={() =>
+            onChooseImagePress(url => setProfilePictureURIAction(url))
+          }
+        >
+          <Image style={styles.avatar} source={{ uri }} />
+        </TouchableHighlight>
         <View style={styles.body}>
           <View style={styles.bodyContent}>
             <TouchableOpacity style={styles.buttonContainer}>
@@ -165,16 +221,23 @@ class ProfileScreen extends Component {
 }
 
 ProfileScreen.propTypes = {
+  uri: PropTypes.string.isRequired,
   goToHistoryAction: PropTypes.func.isRequired,
-  goToHomeAction: PropTypes.func.isRequired
+  goToHomeAction: PropTypes.func.isRequired,
+  setProfilePictureURIAction: PropTypes.func.isRequired
 };
+
+const mapStateToProps = state => ({
+  uri: state.authReducer.uri
+});
 
 const mapDispatchToProps = dispatch => ({
   goToHistoryAction: () => dispatch(GoToHistory()),
-  goToHomeAction: () => dispatch(GoToHome())
+  goToHomeAction: () => dispatch(GoToHome()),
+  setProfilePictureURIAction: uri => dispatch(SetProfilePictureURI(uri))
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(ProfileScreen);

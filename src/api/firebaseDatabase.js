@@ -1,3 +1,4 @@
+/* global XMLHttpRequest:false */
 import * as firebase from "firebase";
 
 function getUser(uid) {
@@ -47,4 +48,29 @@ function createUserEntry(uid, email) {
     });
 }
 
-export { createPayment, createUserEntry, getUser };
+const UploadImage = async (uri, imageFileName) => {
+  const blob = await new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.onload = () => {
+      resolve(xhr.response);
+    };
+    xhr.onerror = () => {
+      reject(new TypeError("Network request failed"));
+    };
+    xhr.responseType = "blob";
+    xhr.open("GET", uri, true);
+    xhr.send(null);
+  });
+
+  const { uid } = firebase.auth().currentUser;
+
+  const ref = firebase
+    .storage()
+    .ref()
+    .child(`photo_profile/${uid}/${imageFileName}`);
+
+  await ref.put(blob);
+  return ref.getDownloadURL();
+};
+
+export { createPayment, createUserEntry, getUser, UploadImage };

@@ -6,7 +6,8 @@ import {
   RegisterPending,
   RegisterSuccess,
   RegisterError,
-  SetWalletAmount
+  SetWalletAmount,
+  SetProfilePictureURI
 } from "../redux/actions/actionCreators";
 import { createUserEntry } from "./firebaseDatabase";
 
@@ -30,6 +31,12 @@ function login(email, password) {
               const { walletAmount } = userSnapshot.val();
               dispatch(SetWalletAmount(walletAmount));
             });
+          const picRef = firebase
+            .storage()
+            .ref(`photo_profile/${uid}/profile_pic.png`);
+          picRef.getDownloadURL().then(uri => {
+            dispatch(SetProfilePictureURI(uri));
+          });
         },
         error => {
           dispatch(LoginPending(false));
@@ -40,9 +47,15 @@ function login(email, password) {
   };
 }
 
-function register(email, password) {
+function register(email, password, confirmPassword) {
   return dispatch => {
     dispatch(RegisterPending(true));
+
+    if (password !== confirmPassword) {
+      dispatch(RegisterPending(false));
+      dispatch(RegisterError("Passwords do not match"));
+      return;
+    }
 
     firebase
       .auth()

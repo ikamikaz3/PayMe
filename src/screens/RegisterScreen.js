@@ -159,7 +159,7 @@ class RegisterScreen extends Component {
           <TouchableOpacity
             style={[styles.buttonContainer, styles.registerButton]}
             title="Register"
-            onPress={() => registerAction(email, password)}
+            onPress={() => registerAction(email, password, confirmPassword)}
           >
             <AppText style={styles.text}>Register</AppText>
           </TouchableOpacity>
