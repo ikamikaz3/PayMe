@@ -13,6 +13,7 @@ import {
 import { register } from "../api/firebaseAuthentication";
 
 import AppText from "../components/AppText";
+import { NavigateBack } from "../redux/actions/actionCreators";
 
 const styles = StyleSheet.create({
   container: {
@@ -108,13 +109,24 @@ class RegisterScreen extends Component {
     this.state = {
       email: "user@example.com",
       password: "password",
-      confirmPassword: "enter password (again)"
+      confirmPassword: "password",
+      firstname: "firstname",
+      lastname: "lastname",
+      phoneNumber: "0673778476"
     };
   }
 
   render() {
-    const { registerErrorMessage, registerAction } = this.props;
-    const { email, password, confirmPassword } = this.state;
+    const { registerErrorMessage, registerAction, navigateBackAction } = this.props;
+    const {
+      email,
+      password,
+      confirmPassword,
+      firstname,
+      lastname,
+      phoneNumber
+    } = this.state;
+    console.log(this.state);
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding">
         <StatusBar hidden />
@@ -156,12 +168,53 @@ class RegisterScreen extends Component {
             />
           </View>
 
+          <View style={styles.inputContainer}>
+            <TextInput
+              value={firstname}
+              style={styles.text}
+              onChangeText={text => this.setState({ firstname: text })}
+            />
+          </View>
+
+          <View style={styles.inputContainer}>
+            <TextInput
+              value={lastname}
+              style={styles.text}
+              onChangeText={text => this.setState({ lastname: text })}
+            />
+          </View>
+
+          <View style={styles.inputContainer}>
+            <TextInput
+              value={phoneNumber}
+              style={styles.text}
+              onChangeText={text => this.setState({ phoneNumber: text })}
+            />
+          </View>
+
           <TouchableOpacity
             style={[styles.buttonContainer, styles.registerButton]}
             title="Register"
-            onPress={() => registerAction(email, password, confirmPassword)}
+            onPress={() =>
+              registerAction(
+                email,
+                password,
+                confirmPassword,
+                firstname,
+                lastname,
+                phoneNumber
+              )
+            }
           >
             <AppText style={styles.text}>Register</AppText>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.buttonContainer, styles.registerButton]}
+            title="Register"
+            onPress={() => navigateBackAction()}
+          >
+            <AppText style={styles.text}>Back</AppText>
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
@@ -171,7 +224,8 @@ class RegisterScreen extends Component {
 
 RegisterScreen.propTypes = {
   registerErrorMessage: PropTypes.string,
-  registerAction: PropTypes.func.isRequired
+  registerAction: PropTypes.func.isRequired,
+  navigateBackAction: PropTypes.func.isRequired
 };
 
 RegisterScreen.defaultProps = {
@@ -185,7 +239,25 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  registerAction: (email, password) => dispatch(register(email, password))
+  registerAction: (
+    email,
+    password,
+    confirmPassword,
+    firstname,
+    lastname,
+    phoneNumber
+  ) =>
+    dispatch(
+      register(
+        email,
+        password,
+        confirmPassword,
+        firstname,
+        lastname,
+        phoneNumber
+      )
+    ),
+  navigateBackAction: () => dispatch(NavigateBack())
 });
 
 export default connect(

@@ -42,13 +42,16 @@ function createPayment(newPayment, receiverSnapshot, receiverUid) {
   });
 }
 
-function createUserEntry(uid, email) {
+function createUserEntry(uid, email, firstname, lastname, phoneNumber) {
   firebase
     .database()
     .ref(`/users/${uid}`)
     .set({
       walletAmount: 0,
-      email
+      email,
+      firstname,
+      lastname,
+      phone_number: phoneNumber
     });
 }
 

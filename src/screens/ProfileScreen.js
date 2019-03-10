@@ -17,6 +17,7 @@ import * as firebase from "firebase";
 import {
   GoToHistory,
   GoToHome,
+  Logout,
   SetProfilePictureURI
 } from "../redux/actions/actionCreators";
 import AppText from "../components/AppText";
@@ -196,7 +197,10 @@ class ProfileScreen extends Component {
 
   render() {
     const { position, firstname, lastname, email, phoneNumber } = this.state;
-    const { uri, setProfilePictureURIAction } = this.props;
+    const { uri, setProfilePictureURIAction, logoutAction } = this.props;
+    const computed =
+      uri || "https://bootdey.com/img/Content/avatar/avatar6.png";
+    console.log(computed);
     return (
       <Animated.View
         style={[position.getLayout(), styles.container]}
@@ -210,7 +214,7 @@ class ProfileScreen extends Component {
             onChooseImagePress(url => setProfilePictureURIAction(url))
           }
         >
-          <Image style={styles.avatar} source={{ uri }} />
+          <Image style={styles.avatar} source={{ uri: computed }} />
         </TouchableHighlight>
         <View style={styles.body}>
           <View style={styles.bodyContent}>
@@ -226,6 +230,12 @@ class ProfileScreen extends Component {
             <TouchableOpacity style={styles.buttonContainer}>
               <AppText style={styles.profileFont}>{phoneNumber}</AppText>
             </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.buttonContainer}
+              onPress={() => logoutAction()}
+            >
+              <AppText style={styles.profileFont}>Logout</AppText>
+            </TouchableOpacity>
           </View>
         </View>
       </Animated.View>
@@ -234,10 +244,15 @@ class ProfileScreen extends Component {
 }
 
 ProfileScreen.propTypes = {
-  uri: PropTypes.string.isRequired,
+  uri: PropTypes.string,
   goToHistoryAction: PropTypes.func.isRequired,
   goToHomeAction: PropTypes.func.isRequired,
-  setProfilePictureURIAction: PropTypes.func.isRequired
+  setProfilePictureURIAction: PropTypes.func.isRequired,
+  logoutAction: PropTypes.func.isRequired
+};
+
+ProfileScreen.defaultProps = {
+  uri: "https://bootdey.com/img/Content/avatar/avatar6.png"
 };
 
 const mapStateToProps = state => ({
@@ -247,7 +262,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   goToHistoryAction: () => dispatch(GoToHistory()),
   goToHomeAction: () => dispatch(GoToHome()),
-  setProfilePictureURIAction: uri => dispatch(SetProfilePictureURI(uri))
+  setProfilePictureURIAction: uri => dispatch(SetProfilePictureURI(uri)),
+  logoutAction: () => dispatch(Logout())
 });
 
 export default connect(
