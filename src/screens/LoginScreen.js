@@ -20,6 +20,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     alignItems: "center",
+    paddingRight: 40,
+    paddingLeft: 60,
     backgroundColor: "rgba(0, 191, 255, 0.5)",
     justifyContent: "space-evenly"
   },
@@ -89,6 +91,11 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18
+  },
+  errorText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "red"
   }
 });
 
@@ -116,7 +123,10 @@ class LoginScreen extends Component {
           }}
         />
         <AppText style={{ fontSize: 50 }}>My DigiPay</AppText>
-        <View style={styles.background}>
+        {loginErrorMessage !== null && (
+          <AppText style={styles.errorText}>{loginErrorMessage}</AppText>
+        )}
+        <View style={[styles.background]}>
           <View style={styles.inputContainer}>
             <TextInput
               keyboardType="email-address"
@@ -126,7 +136,6 @@ class LoginScreen extends Component {
               onChangeText={text => this.setState({ email: text })}
             />
           </View>
-
           <View style={styles.inputContainer}>
             <TextInput
               value={password}
@@ -134,19 +143,13 @@ class LoginScreen extends Component {
               onChangeText={text => this.setState({ password: text })}
             />
           </View>
-
           <TouchableOpacity
             style={[styles.buttonContainer, styles.loginButton]}
             title="Login"
             onPress={() => loginAction(email, password)}
           >
             <AppText style={styles.text}>Login</AppText>
-
-            {loginErrorMessage !== null && (
-              <AppText style={styles.text}>{loginErrorMessage}</AppText>
-            )}
           </TouchableOpacity>
-
           <TouchableOpacity
             // style={[styles.buttonContainer, styles.notRegisterStyle]}
             style={[styles.buttonContainer, styles.text]}

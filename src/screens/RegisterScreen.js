@@ -17,6 +17,8 @@ import AppText from "../components/AppText";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingRight: 40,
+    paddingLeft: 60,
     flexDirection: "column",
     alignItems: "center",
     backgroundColor: "rgba(0, 191, 255, 0.5)",
@@ -93,6 +95,11 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18
+  },
+  errorText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "red"
   }
 });
 
@@ -124,15 +131,11 @@ class RegisterScreen extends Component {
           }}
         />
         <AppText style={{ fontSize: 50 }}>My DigiPay</AppText>
+        {registerErrorMessage !== null && (
+          <AppText style={styles.errorText}>{registerErrorMessage}</AppText>
+        )}
         <View style={styles.background}>
           <View style={styles.inputContainer}>
-            {/* <Image
-              style={styles.inputIcon}
-              source={{
-                uri: "https://png.icons8.com/message/ultraviolet/50/3498db"
-              }}
-            /> */}
-
             <TextInput
               keyboardType="email-address"
               underlineColorAndroid="transparent"
@@ -143,13 +146,6 @@ class RegisterScreen extends Component {
           </View>
 
           <View style={styles.inputContainer}>
-            {/* <Image
-              style={styles.inputIcon}
-              source={{
-                uri: "https://png.icons8.com/key-2/ultraviolet/50/3498db"
-              }}
-            /> */}
-
             <TextInput
               value={password}
               style={styles.text}
@@ -158,13 +154,6 @@ class RegisterScreen extends Component {
           </View>
 
           <View style={styles.inputContainer}>
-            {/* <Image
-              style={styles.inputIcon}
-              source={{
-                uri: "https://png.icons8.com/key-2/ultraviolet/50/3498db"
-              }}
-            /> */}
-
             <TextInput
               value={confirmPassword}
               style={styles.text}
@@ -178,9 +167,6 @@ class RegisterScreen extends Component {
             onPress={() => registerAction(email, password)}
           >
             <AppText style={styles.text}>Register</AppText>
-            {registerErrorMessage !== null && (
-              <AppText style={styles.text}>{registerErrorMessage}</AppText>
-            )}
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
