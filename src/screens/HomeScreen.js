@@ -17,7 +17,7 @@ import {
 const styles = StyleSheet.create({
   page: {
     flex: 1,
-    backgroundColor: "#f7faff"
+    backgroundColor: "#cba"
   },
   container: {
     flex: 1,

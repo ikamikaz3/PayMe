@@ -8,6 +8,7 @@ import {
   Animated,
   PanResponder,
   Alert,
+  ScrollView,
   TouchableHighlight
 } from "react-native";
 import { connect } from "react-redux";
@@ -23,44 +24,24 @@ import AppText from "../components/AppText";
 import { UploadImage, getUser } from "../api/firebaseDatabase";
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#cba"
+  },
   header: {
     backgroundColor: "rgba(0, 191, 255, 0.5)",
-    height: 150
+    paddingTop: 10,
+    paddingBottom: 10
   },
   avatar: {
-    width: 130,
-    height: 130,
-    borderRadius: 63,
+    width: 150,
+    height: 150,
+    borderRadius: 90,
     borderWidth: 4,
     borderColor: "white",
-    marginBottom: 10,
-    alignSelf: "center",
-    position: "absolute",
-    marginTop: 130,
-    bottom: 30
-  },
-  avatarLogo: {
-    width: 130,
-    height: 130,
-    borderRadius: 63,
-    borderWidth: 4,
-    borderColor: "white",
-    marginBottom: 10,
-    alignSelf: "center",
-    position: "absolute",
-    marginTop: 130,
-    bottom: 40
-  },
-  digiTitre: {
-    alignSelf: "center",
-    fontSize: 40.7,
-    top: 15
-  },
-  body: {
-    marginTop: 40
+    alignSelf: "center"
   },
   bodyContent: {
-    flex: 3,
     alignItems: "center",
     padding: 30
   },
@@ -198,37 +179,39 @@ class ProfileScreen extends Component {
     const { position, firstname, lastname, email, phoneNumber } = this.state;
     const { uri, setProfilePictureURIAction } = this.props;
     return (
-      <Animated.View
-        style={[position.getLayout(), styles.container]}
-        {...this.panResponder.panHandlers}
-      >
-        <View style={styles.header}>
-          <AppText style={styles.digiTitre}>My Digi Pay </AppText>
-        </View>
-        <TouchableHighlight
-          onPress={() =>
-            onChooseImagePress(url => setProfilePictureURIAction(url))
-          }
+      <ScrollView style={styles.container}>
+        <Animated.View
+          style={[position.getLayout(), styles.container]}
+          {...this.panResponder.panHandlers}
         >
-          <Image style={styles.avatar} source={{ uri }} />
-        </TouchableHighlight>
-        <View style={styles.body}>
-          <View style={styles.bodyContent}>
-            <TouchableOpacity style={styles.buttonContainer}>
-              <AppText style={styles.profileFont}>{firstname}</AppText>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonContainer}>
-              <AppText style={styles.profileFont}>{lastname}</AppText>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonContainer}>
-              <AppText style={styles.profileFont}>{email}</AppText>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonContainer}>
-              <AppText style={styles.profileFont}>{phoneNumber}</AppText>
-            </TouchableOpacity>
+          <TouchableHighlight
+            style={styles.header}
+            onPress={() =>
+              onChooseImagePress(url => setProfilePictureURIAction(url))
+            }
+            underlayColor="rgba(0, 191, 255, 0.5)"
+          >
+            <Image style={styles.avatar} source={{ uri }} />
+          </TouchableHighlight>
+
+          <View style={styles.body}>
+            <View style={styles.bodyContent}>
+              <TouchableOpacity style={styles.buttonContainer}>
+                <AppText style={styles.profileFont}>{firstname}</AppText>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.buttonContainer}>
+                <AppText style={styles.profileFont}>{lastname}</AppText>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.buttonContainer}>
+                <AppText style={styles.profileFont}>{email}</AppText>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.buttonContainer}>
+                <AppText style={styles.profileFont}>{phoneNumber}</AppText>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-      </Animated.View>
+        </Animated.View>
+      </ScrollView>
     );
   }
 }
