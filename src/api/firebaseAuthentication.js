@@ -34,13 +34,12 @@ function login(email, password) {
           const picRef = firebase
             .storage()
             .ref(`photo_profile/${uid}/profile_pic.png`);
-          console.log(picRef);
           if (picRef) {
             picRef.getDownloadURL().then(
               uri => {
                 dispatch(SetProfilePictureURI(uri));
               },
-              error => {
+              () => {
                 dispatch(SetProfilePictureURI(null));
               }
             );
@@ -66,14 +65,6 @@ function register(
   return dispatch => {
     dispatch(RegisterPending(true));
 
-    console.log(
-      password,
-      confirmPassword,
-      email,
-      firstname,
-      lastname,
-      phoneNumber
-    );
     if (password !== confirmPassword) {
       dispatch(RegisterPending(false));
       dispatch(RegisterError("Passwords do not match"));
@@ -94,7 +85,6 @@ function register(
         error => {
           dispatch(RegisterPending(false));
           const errorMessage = error.message;
-          // ...
           dispatch(RegisterError(errorMessage));
         }
       );

@@ -117,7 +117,11 @@ class RegisterScreen extends Component {
   }
 
   render() {
-    const { registerErrorMessage, registerAction, navigateBackAction } = this.props;
+    const {
+      registerErrorMessage,
+      registerAction,
+      navigateBackAction
+    } = this.props;
     const {
       email,
       password,
@@ -126,7 +130,6 @@ class RegisterScreen extends Component {
       lastname,
       phoneNumber
     } = this.state;
-    console.log(this.state);
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding">
         <StatusBar hidden />

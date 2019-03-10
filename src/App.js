@@ -16,16 +16,6 @@ class App extends React.Component {
     };
   }
 
-  // async componentWillMount() {
-  //   await Font.loadAsync({
-  //     ...Icon.Ionicons.font,
-  //     openSansSemiBold: fontPath
-  //   });
-  //   console.log(this.state);
-  //   this.setState({ isLoadingComplete: true });
-  //   console.log(this.state);
-  // }
-
   loadResourcesAsync = async () => {
     await Promise.all([
       Font.loadAsync({
@@ -34,10 +24,6 @@ class App extends React.Component {
       })
     ]);
   };
-
-  // handleLoadingError = error => {
-  //   console.warn(error);
-  // };
 
   handleFinishLoading = () => {
     this.setState({ isLoadingComplete: true });
@@ -51,7 +37,6 @@ class App extends React.Component {
       return (
         <AppLoading
           startAsync={this.loadResourcesAsync}
-          // onError={this.handleLoadingError}
           onFinish={this.handleFinishLoading}
         />
       );
