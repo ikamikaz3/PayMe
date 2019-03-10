@@ -22,8 +22,17 @@ const styles = StyleSheet.create({
     paddingRight: "5%",
     backgroundColor: "rgba(0, 191, 255, 0.5)"
   },
+  processingText: {
+    flex: 1,
+    paddingTop: 25,
+    flexDirection: "row",
+    justifyContent: "center",
+    backgroundColor: "rgba(0, 191, 255, 0.5)"
+  },
   text: {
     fontSize: 20,
+    color: "red",
+    fontWeight: "bold",
     justifyContent: "center"
   }
 });
@@ -82,11 +91,19 @@ class Pay extends Component {
 
     if (hasCameraPermission === null) {
       return (
-        <AppText style={styles.text}>Requesting for camera permission</AppText>
+        <View style={styles.processingText}>
+          <AppText style={styles.text}>
+            Requesting for camera permission...
+          </AppText>
+        </View>
       );
     }
     if (hasCameraPermission === false) {
-      return <AppText style={styles.text}>No access to camera</AppText>;
+      return (
+        <View style={styles.processingText}>
+          <AppText style={styles.text}>No access to camera !</AppText>
+        </View>
+      );
     }
     return (
       <View style={styles.container}>
