@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { Permissions, ImagePicker } from "expo";
+import * as firebase from "firebase";
 
 import {
   GoToHistory,
@@ -19,7 +20,7 @@ import {
   SetProfilePictureURI
 } from "../redux/actions/actionCreators";
 import AppText from "../components/AppText";
-import { UploadImage } from "../api/firebaseDatabase";
+import { UploadImage, getUser } from "../api/firebaseDatabase";
 
 const styles = StyleSheet.create({
   header: {
@@ -181,8 +182,20 @@ class ProfileScreen extends Component {
     });
   }
 
+  async componentDidMount() {
+    const { uid } = firebase.auth().currentUser;
+    getUser(uid).then(userSnapshot => {
+      this.setState({
+        firstname: userSnapshot.val().firstname,
+        lastname: userSnapshot.val().lastname,
+        phoneNumber: userSnapshot.val().phone_number,
+        email: userSnapshot.val().email
+      });
+    });
+  }
+
   render() {
-    const { position } = this.state;
+    const { position, firstname, lastname, email, phoneNumber } = this.state;
     const { uri, setProfilePictureURIAction } = this.props;
     return (
       <Animated.View
@@ -202,16 +215,16 @@ class ProfileScreen extends Component {
         <View style={styles.body}>
           <View style={styles.bodyContent}>
             <TouchableOpacity style={styles.buttonContainer}>
-              <AppText style={styles.profileFont}>Prenom</AppText>
+              <AppText style={styles.profileFont}>{firstname}</AppText>
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttonContainer}>
-              <AppText style={styles.profileFont}>Nom</AppText>
+              <AppText style={styles.profileFont}>{lastname}</AppText>
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttonContainer}>
-              <AppText style={styles.profileFont}>Mail</AppText>
+              <AppText style={styles.profileFont}>{email}</AppText>
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttonContainer}>
-              <AppText style={styles.profileFont}>Tel</AppText>
+              <AppText style={styles.profileFont}>{phoneNumber}</AppText>
             </TouchableOpacity>
           </View>
         </View>

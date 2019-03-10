@@ -28,11 +28,12 @@ const styles = StyleSheet.create({
 
 AppText.propTypes = {
   style: Text.propTypes.style,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node
 };
 
 AppText.defaultProps = {
-  style: styles.baseText
+  style: styles.baseText,
+  children: "Text missing."
 };
 
 export default AppText;

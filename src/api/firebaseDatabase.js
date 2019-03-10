@@ -25,10 +25,14 @@ function createPayment(newPayment, receiverSnapshot, receiverUid) {
 
     updates[`/users/${payerUid}`] = {
       email: payerSnapshot.val().email,
+      firstname: payerSnapshot.val().firstname,
+      lastname: payerSnapshot.val().lastname,
       walletAmount: payerSnapshot.val().walletAmount - newPayment.amount
     };
     updates[`/users/${receiverUid}`] = {
       email: receiverSnapshot.val().email,
+      firstname: receiverSnapshot.val().firstname,
+      lastname: receiverSnapshot.val().lastname,
       walletAmount: receiverSnapshot.val().walletAmount + newPayment.amount
     };
     return firebase
