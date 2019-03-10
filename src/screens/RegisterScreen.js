@@ -64,11 +64,6 @@ const styles = StyleSheet.create({
 
     elevation: 19
   },
-  // inputIcon: {
-  //   width: 30,
-  //   height: 30,
-  //   marginRight: 2
-  // },
   buttonContainer: {
     height: 45,
     flexDirection: "row",

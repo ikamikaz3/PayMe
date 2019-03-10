@@ -4,7 +4,11 @@ import {
   reduxifyNavigator
 } from "react-navigation-redux-helpers";
 
+import { YellowBox } from "react-native";
+
 import AppNavigator from "./routes";
+
+YellowBox.ignoreWarnings(["Setting a timer"]);
 
 const navMiddleware = createReactNavigationReduxMiddleware(
   "root",
