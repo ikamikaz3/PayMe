@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Image,
   StatusBar,
+  ScrollView,
   KeyboardAvoidingView
 } from "react-native";
 import { register } from "../api/firebaseAuthentication";
@@ -131,96 +132,98 @@ class RegisterScreen extends Component {
       phoneNumber
     } = this.state;
     return (
-      <KeyboardAvoidingView style={styles.container} behavior="padding">
-        <StatusBar hidden />
-        <Image
-          style={styles.avatar}
-          source={{
-            uri:
-              "https://img.freepik.com/free-vector/hand-holding-smartphone-scan-qr-code-pay_32996-137.jpg?size=338&ext=jpg"
-          }}
-        />
-        <AppText style={{ fontSize: 50 }}>My DigiPay</AppText>
-        {registerErrorMessage !== null && (
-          <AppText style={styles.errorText}>{registerErrorMessage}</AppText>
-        )}
-        <View style={styles.background}>
-          <View style={styles.inputContainer}>
-            <TextInput
-              keyboardType="email-address"
-              underlineColorAndroid="transparent"
-              value={email}
-              style={styles.text}
-              onChangeText={text => this.setState({ email: text })}
-            />
+      <ScrollView>
+        <KeyboardAvoidingView style={styles.container} behavior="padding">
+          <StatusBar hidden />
+          <Image
+            style={styles.avatar}
+            source={{
+              uri:
+                "https://img.freepik.com/free-vector/hand-holding-smartphone-scan-qr-code-pay_32996-137.jpg?size=338&ext=jpg"
+            }}
+          />
+          <AppText style={{ fontSize: 50 }}>My DigiPay</AppText>
+          {registerErrorMessage !== null && (
+            <AppText style={styles.errorText}>{registerErrorMessage}</AppText>
+          )}
+          <View style={styles.background}>
+            <View style={styles.inputContainer}>
+              <TextInput
+                keyboardType="email-address"
+                underlineColorAndroid="transparent"
+                value={email}
+                style={styles.text}
+                onChangeText={text => this.setState({ email: text })}
+              />
+            </View>
+
+            <View style={styles.inputContainer}>
+              <TextInput
+                value={password}
+                style={styles.text}
+                onChangeText={text => this.setState({ password: text })}
+              />
+            </View>
+
+            <View style={styles.inputContainer}>
+              <TextInput
+                value={confirmPassword}
+                style={styles.text}
+                onChangeText={text => this.setState({ confirmPassword: text })}
+              />
+            </View>
+
+            <View style={styles.inputContainer}>
+              <TextInput
+                value={firstname}
+                style={styles.text}
+                onChangeText={text => this.setState({ firstname: text })}
+              />
+            </View>
+
+            <View style={styles.inputContainer}>
+              <TextInput
+                value={lastname}
+                style={styles.text}
+                onChangeText={text => this.setState({ lastname: text })}
+              />
+            </View>
+
+            <View style={styles.inputContainer}>
+              <TextInput
+                value={phoneNumber}
+                style={styles.text}
+                onChangeText={text => this.setState({ phoneNumber: text })}
+              />
+            </View>
+
+            <TouchableOpacity
+              style={[styles.buttonContainer, styles.registerButton]}
+              title="Register"
+              onPress={() =>
+                registerAction(
+                  email,
+                  password,
+                  confirmPassword,
+                  firstname,
+                  lastname,
+                  phoneNumber
+                )
+              }
+            >
+              <AppText style={styles.text}>Register</AppText>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[styles.buttonContainer, styles.registerButton]}
+              title="Register"
+              onPress={() => navigateBackAction()}
+            >
+              <AppText style={styles.text}>Back</AppText>
+            </TouchableOpacity>
           </View>
-
-          <View style={styles.inputContainer}>
-            <TextInput
-              value={password}
-              style={styles.text}
-              onChangeText={text => this.setState({ password: text })}
-            />
-          </View>
-
-          <View style={styles.inputContainer}>
-            <TextInput
-              value={confirmPassword}
-              style={styles.text}
-              onChangeText={text => this.setState({ confirmPassword: text })}
-            />
-          </View>
-
-          <View style={styles.inputContainer}>
-            <TextInput
-              value={firstname}
-              style={styles.text}
-              onChangeText={text => this.setState({ firstname: text })}
-            />
-          </View>
-
-          <View style={styles.inputContainer}>
-            <TextInput
-              value={lastname}
-              style={styles.text}
-              onChangeText={text => this.setState({ lastname: text })}
-            />
-          </View>
-
-          <View style={styles.inputContainer}>
-            <TextInput
-              value={phoneNumber}
-              style={styles.text}
-              onChangeText={text => this.setState({ phoneNumber: text })}
-            />
-          </View>
-
-          <TouchableOpacity
-            style={[styles.buttonContainer, styles.registerButton]}
-            title="Register"
-            onPress={() =>
-              registerAction(
-                email,
-                password,
-                confirmPassword,
-                firstname,
-                lastname,
-                phoneNumber
-              )
-            }
-          >
-            <AppText style={styles.text}>Register</AppText>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={[styles.buttonContainer, styles.registerButton]}
-            title="Register"
-            onPress={() => navigateBackAction()}
-          >
-            <AppText style={styles.text}>Back</AppText>
-          </TouchableOpacity>
-        </View>
-      </KeyboardAvoidingView>
+        </KeyboardAvoidingView>
+      </ScrollView>
     );
   }
 }
