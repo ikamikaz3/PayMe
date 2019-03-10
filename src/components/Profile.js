@@ -22,7 +22,6 @@ class Profile extends Component {
             <View style={styles.bodyContent}>
               <Text style={styles.name}>John Doe rgrr</Text>
               <Text style={styles.info}>UX Designer / Mobile developer</Text>
-              <Text style={styles.description}>Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum electram expetendis, omittam deseruisse consequuntur ius an,</Text>
               
               <TouchableOpacity style={styles.buttonContainer}>
                 <Text>Prenom</Text>  
